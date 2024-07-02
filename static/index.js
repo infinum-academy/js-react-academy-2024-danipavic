@@ -1,7 +1,9 @@
 const REVIEWS_LOCAL_STORAGE_KEY = "reviews";
-let reviews = [];
+let reviews = getReviewsFromLocalStorage();
 
-function handleFormSubmit(event, reviews, reviewsContainer) {
+function handleFormSubmit(event) {
+  event.preventDefault();
+
   const { description, rating } = event.target.elements;
   const newReview = {
     description: description.value,
@@ -11,81 +13,74 @@ function handleFormSubmit(event, reviews, reviewsContainer) {
 
   description.value = "";
   rating.value = "";
-
   reviews.push(newReview);
 
-  saveReviewsToLocalStorage(reviews);
-  calculateAverageRating(reviews);
-  renderReview(newReview, reviews, reviewsContainer);
+  saveReviewsToLocalStorage();
+  calculateAverageRating();
+  renderReview(newReview);
   clearSelectedStars();
 }
 
-function createReviewElement(review, reviews) {
+function createReviewElement(review) {
   const reviewElement = document.createElement("div");
 
   reviewElement.classList.add("review-card");
   reviewElement.innerHTML = `
-            <p class="review-description">${review.description}</p>
-            <p class="review-rating">${review.rating}/5</p>
-            <button class="button">Remove</button>
-        `;
+    <p class="review-description">${review.description}</p>
+    <p class="review-rating">${review.rating}/5</p>
+    <button class="button">Remove</button>
+  `;
 
   reviewElement.querySelector("button").addEventListener("click", () => {
-    removeReviewElement(reviews, review.id, reviewElement);
+    removeReviewElement(review.id, reviewElement);
   });
 
   return reviewElement;
 }
 
-function removeReviewElement(reviews, reviewId, reviewElement) {
+function removeReviewElement(reviewId, reviewElement) {
   reviewElement.remove();
-  const reviewIndex = reviews.findIndex((review) => review.id === reviewId);
-  reviews.splice(reviewIndex, 1);
+  reviews = reviews.filter((review) => review.id !== reviewId);
 
-  saveReviewsToLocalStorage(reviews);
-  calculateAverageRating(reviews);
+  saveReviewsToLocalStorage();
+  calculateAverageRating();
 }
 
-function initReviews(reviews, reviewsContainer) {
-  if (!reviews.length) return;
+function renderReview(review) {
+  const reviewsContainer = document.querySelector(".reviews");
 
-  reviews.forEach((review) => {
-    reviewsContainer.appendChild(createReviewElement(review, reviews));
-  });
+  reviewsContainer.appendChild(createReviewElement(review));
 }
 
-function renderReview(review, reviews, reviewsContainer) {
-  reviewsContainer.appendChild(createReviewElement(review, reviews));
-}
-
-function saveReviewsToLocalStorage(reviews) {
+function saveReviewsToLocalStorage() {
   localStorage.setItem(REVIEWS_LOCAL_STORAGE_KEY, JSON.stringify(reviews));
 }
 
 function getReviewsFromLocalStorage() {
-  const reviews = localStorage.getItem(REVIEWS_LOCAL_STORAGE_KEY);
+  const storedReviews = localStorage.getItem(REVIEWS_LOCAL_STORAGE_KEY);
 
-  return reviews ? JSON.parse(reviews) : [];
+  return storedReviews ? JSON.parse(storedReviews) : [];
 }
 
-function calculateAverageRating(reviews) {
+function calculateAverageRating() {
   const averageRatingElement = document.querySelector(
     ".show-details__average-rating"
   );
 
-  if (!reviews.length) {
+  if (reviews.length === 0) {
     averageRatingElement.textContent = "No reviews yet";
-
     return;
   }
 
-  averageRatingElement.textContent =
-    reviews.reduce((acc, review) => {
-      return acc + parseInt(review.rating);
-    }, 0) / reviews.length;
+  const averageRating =
+    reviews.reduce((acc, review) => acc + parseInt(review.rating), 0) /
+    reviews.length;
+
+  averageRatingElement.textContent = averageRating.toFixed(1);
 }
 
-function renderRatingStars(ratingForm) {
+function renderRatingStars() {
+  const ratingForm = document.querySelector(".review-form");
   const ratingStarsContainer = document.querySelector(".review-form__stars");
 
   for (let i = 1; i <= 5; i++) {
@@ -118,17 +113,14 @@ function clearSelectedStars() {
 function init() {
   const ratingForm = document.querySelector(".review-form");
   const reviewsContainer = document.querySelector(".reviews");
-  const reviews = getReviewsFromLocalStorage();
 
-  initReviews(reviews, reviewsContainer);
-  renderRatingStars(ratingForm);
-  calculateAverageRating(reviews);
+  reviews.forEach((review) =>
+    reviewsContainer.appendChild(createReviewElement(review))
+  );
+  renderRatingStars();
+  calculateAverageRating();
 
-  ratingForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-
-    handleFormSubmit(event, reviews, reviewsContainer);
-  });
+  ratingForm.addEventListener("submit", handleFormSubmit);
 }
 
 init();
