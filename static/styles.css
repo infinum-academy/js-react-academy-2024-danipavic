@@ -21,17 +21,30 @@ main {
 }
 
 h1,
-h2 {
+h2,
+.review-form__stars,
+.review-description,
+.review-rating {
   color: var(--white-color);
 }
 
-.button {
+.button,
+.review-form textarea {
   padding: 12px 24px;
+  border-radius: var(--border-radius);
+}
+
+.button {
   margin-bottom: 20px;
   color: var(--black-color);
   background-color: var(--white-color);
   border: 1px solid var(--white-color);
-  border-radius: var(--border-radius);
+}
+
+.button:hover {
+  color: var(--white-color);
+  background-color: var(--light-purple-color);
+  cursor: pointer;
 }
 
 .show-details {
@@ -42,13 +55,22 @@ h2 {
   border-radius: var(--border-radius);
 }
 
-.show-details__information {
+.show-details__information,
+.review-card {
   padding: var(--container-padding);
+  border-radius: var(--border-radius);
+}
+
+.show-details__information {
   color: var(--light-purple-color);
 }
 
-.show-details__image {
-  object-fit: contain;
+.review-card {
+  background-color: var(--light-purple-color);
+}
+
+.review-card:not(:last-child) {
+  margin-bottom: 12px;
 }
 
 .review-form {
@@ -58,13 +80,12 @@ h2 {
   gap: 12px;
 }
 
-.review-form,
-textarea {
-  border-radius: calc(var(--border-radius) / 2);
+.review-form textarea {
+  align-self: stretch;
 }
 
-.review-form__stars {
-  color: var(--white-color);
+.review-form input {
+  visibility: hidden;
 }
 
 .review-form__stars span:hover {
@@ -75,33 +96,6 @@ textarea {
   color: var(--yellow-color);
 }
 
-.review-form input {
-  visibility: hidden;
-}
-
-.review-form textarea {
-  align-self: stretch;
-  padding: 12px 24px;
-}
-
-.button:hover {
-  color: var(--white-color);
-  border: 1px solid var(--white-color);
-  background-color: var(--light-purple-color);
-  cursor: pointer;
-}
-
-.review-card {
-  padding: var(--container-padding);
-  background-color: var(--light-purple-color);
-  border-radius: var(--border-radius);
-}
-
-.review-card:not(:last-child) {
-  margin-bottom: 12px;
-}
-
-.review-description,
-.review-rating {
-  color: var(--white-color);
+.show-details__image {
+  object-fit: contain;
 }
