@@ -26,8 +26,9 @@ function createReviewElement(review) {
 
   reviewElement.classList.add("review-card");
   reviewElement.innerHTML = `
-    <p class="review-description">${review.description}</p>
-    <p class="review-rating">${review.rating}/5</p>
+    <p class="review__description">${review.description}</p>
+    <p class="review__rating">${review.rating}/5</p>
+    ${renderStarsRating(review.rating)}
     <button class="button">Remove</button>
   `;
 
@@ -79,7 +80,7 @@ function calculateAverageRating() {
   averageRatingElement.textContent = averageRating.toFixed(1);
 }
 
-function renderRatingStars() {
+function renderRatingFormStars() {
   const ratingForm = document.querySelector(".review-form");
   const ratingStarsContainer = document.querySelector(".review-form__stars");
 
@@ -98,14 +99,30 @@ function renderRatingStars() {
   }
 }
 
+function renderStarsRating(rating) {
+  let stars = "";
+
+  for (let i = 1; i <= 5; i++) {
+    const star = `<span class='star ${
+      i <= rating ? "selected" : ""
+    }'>&#9733</span>`;
+
+    stars += star;
+  }
+
+  return `<div class='review__stars'>${stars}</div>`;
+}
+
 function toggleSelectedStars(clickedStarIndex) {
-  document.querySelectorAll(".star").forEach((star, index) => {
-    star.classList.toggle("selected", clickedStarIndex > index);
-  });
+  document
+    .querySelectorAll(".review-form__stars .star")
+    .forEach((star, index) => {
+      star.classList.toggle("selected", clickedStarIndex > index);
+    });
 }
 
 function clearSelectedStars() {
-  document.querySelectorAll(".selected").forEach((star) => {
+  document.querySelectorAll(".review-form__stars .selected").forEach((star) => {
     star.classList.remove("selected");
   });
 }
@@ -117,7 +134,7 @@ function init() {
   reviews.forEach((review) =>
     reviewsContainer.appendChild(createReviewElement(review))
   );
-  renderRatingStars();
+  renderRatingFormStars();
   calculateAverageRating();
 
   ratingForm.addEventListener("submit", handleFormSubmit);

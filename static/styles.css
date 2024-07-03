@@ -23,9 +23,13 @@ main {
 h1,
 h2,
 .review-form__stars,
-.review-description,
-.review-rating {
+.review__description,
+.review__rating {
   color: var(--white-color);
+}
+
+.review__stars {
+  margin-bottom: 20px;
 }
 
 .button,
@@ -92,7 +96,8 @@ h2,
   cursor: pointer;
 }
 
-.review-form__stars span.selected {
+.review-form__stars span.selected,
+.review__stars span.selected {
   color: var(--yellow-color);
 }
 
