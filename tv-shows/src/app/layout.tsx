@@ -1,3 +1,4 @@
+import { Box } from "@chakra-ui/react";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Header } from "./components/shared/Header/Header";
@@ -18,8 +19,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Providers>
-          <Header />
-          {children}
+          <Box as="main" maxW="70vw" mx="auto">
+            <Header />
+            {children}
+          </Box>
         </Providers>
       </body>
     </html>
