@@ -9,7 +9,7 @@ interface IShowProps {
 
 export const ShowDetails = ({ show }: IShowProps) => {
   return (
-    <Card borderRadius="2xl" overflow="hidden">
+    <Card borderRadius="2xl" overflow="hidden" mb={4}>
       <Image
         src={show.imageUrl}
         alt="Show image"
