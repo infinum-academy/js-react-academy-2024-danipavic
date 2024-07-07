@@ -39,7 +39,7 @@ export const ReviewItem = ({
         <Text fontSize="sm">{rating}/5</Text>
       </CardBody>
       <CardFooter>
-        <StyledButton />
+        <StyledButton label="Remove" />
       </CardFooter>
     </Card>
   );

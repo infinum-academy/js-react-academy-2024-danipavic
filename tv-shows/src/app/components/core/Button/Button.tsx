@@ -1,6 +1,6 @@
 import { Button } from "@chakra-ui/react";
 
-export const StyledButton = () => (
+export const StyledButton = ({ label }: { label: string }) => (
   <Button
     borderRadius="3xl"
     variant="solid"
@@ -15,6 +15,6 @@ export const StyledButton = () => (
       },
     }}
   >
-    Remove
+    {label}
   </Button>
 );
