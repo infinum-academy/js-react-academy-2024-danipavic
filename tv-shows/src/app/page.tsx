@@ -1,9 +1,7 @@
 "use client";
 
-import { Box } from "@chakra-ui/react";
-import { ReviewList } from "./components/features/review/ReviewList/ReviewList";
 import { ShowDetails } from "./components/features/shows/ShowDetails/ShowDetails";
-import { IReview } from "./typings/Review.type";
+import { ShowReviewSection } from "./components/features/shows/ShowReviewSection/ShowReviewSection";
 import { IShow } from "./typings/Show.type";
 
 const mockShow: IShow = {
@@ -13,32 +11,11 @@ const mockShow: IShow = {
   imageUrl: "/assets/show-hero.jpg",
 };
 
-const reviews: Array<IReview> = [
-  {
-    reviewerEmail: "dani.pavic@infinum.com",
-    reviewerAvatarURL: "https://bit.ly/dan-abramov",
-    comment: "This show is amazing!",
-    rating: 10,
-  },
-  {
-    reviewerEmail: "dani.pavic@infinum.com",
-    reviewerAvatarURL: "https://bit.ly/dan-abramov",
-    comment: "This show is amazing!",
-    rating: 10,
-  },
-  {
-    reviewerEmail: "dani.pavic@infinum.com",
-    reviewerAvatarURL: "https://bit.ly/dan-abramov",
-    comment: "This show is amazing!",
-    rating: 10,
-  },
-];
-
 export default function Home() {
   return (
-    <Box>
+    <>
       <ShowDetails show={mockShow} />
-      <ReviewList reviews={reviews} />
-    </Box>
+      <ShowReviewSection />
+    </>
   );
 }
