@@ -15,13 +15,13 @@ function getStarsColor(
   hoveredRating: number | null,
   index: number
 ) {
-  return (canInteract &&
-    rating &&
-    ((hoveredRating !== null && hoveredRating > index) ||
-      (!hoveredRating && rating > index))) ||
-    (!canInteract && rating > index)
-    ? "yellow.400"
-    : "white";
+  if (canInteract) {
+    if (hoveredRating !== null) {
+      return hoveredRating > index ? "yellow.400" : "white";
+    }
+    return rating > index ? "yellow.400" : "white";
+  }
+  return rating > index ? "yellow.400" : "white";
 }
 
 export const StarsRating = ({
@@ -44,11 +44,13 @@ export const StarsRating = ({
               setSelectedRating(index + 1);
             }
           }}
-          onMouseEnter={() => setHoveredRating(index + 1)}
+          onMouseEnter={() => {
+            if (canInteract) {
+              setHoveredRating(index + 1);
+            }
+          }}
           onMouseLeave={() => {
-            if (rating) {
-              setHoveredRating(rating);
-            } else {
+            if (canInteract) {
               setHoveredRating(null);
             }
           }}
