@@ -59,9 +59,9 @@ export const ReviewForm = ({ onAddReview, reviews }: IReviewFormProps) => {
 
         <Input
           value={selectedRating ?? 0}
+          readOnly
           name="rating"
           display="none"
-          required
         />
         <StarsRating
           canInteract={true}
