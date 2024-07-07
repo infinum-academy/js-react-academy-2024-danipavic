@@ -1,9 +1,16 @@
 import { Button } from "@chakra-ui/react";
 
-export const StyledButton = ({ label }: { label: string }) => (
+export const StyledButton = ({
+  label,
+  type = "button",
+}: {
+  label: string;
+  type?: "button" | "submit";
+}) => (
   <Button
     borderRadius="3xl"
     variant="solid"
+    type={type}
     sx={{
       bg: "white",
       color: "black",
