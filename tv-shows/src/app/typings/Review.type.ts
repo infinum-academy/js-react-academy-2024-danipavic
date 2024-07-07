@@ -1,6 +1,7 @@
 export interface IReview {
+  rating: number;
+  comment: string;
   reviewerEmail: string;
   reviewerAvatarURL: string;
-  rating: number;
-  comment?: string;
+  uuid: string;
 }

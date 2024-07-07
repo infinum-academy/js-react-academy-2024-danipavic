@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@chakra-ui/react";
 
 export const StyledButton = ({
@@ -9,6 +11,7 @@ export const StyledButton = ({
 }) => (
   <Button
     borderRadius="3xl"
+    mb={4}
     variant="solid"
     type={type}
     sx={{

@@ -16,6 +16,7 @@ function getStarsColor(
   index: number
 ) {
   return (canInteract &&
+    rating &&
     ((hoveredRating !== null && hoveredRating > index) ||
       (!hoveredRating && rating > index))) ||
     (!canInteract && rating > index)

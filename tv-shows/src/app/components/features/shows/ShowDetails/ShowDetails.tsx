@@ -1,13 +1,15 @@
 "use client";
 
 import { Card, CardBody, Heading, Image, Text } from "@chakra-ui/react";
+import { IReview } from "../../../../typings/Review.type";
 import { IShow } from "../../../../typings/Show.type";
 
 interface IShowProps {
   show: IShow;
+  reviews: Array<IReview>;
 }
 
-export const ShowDetails = ({ show }: IShowProps) => {
+export const ShowDetails = ({ show, reviews }: IShowProps) => {
   return (
     <Card borderRadius="2xl" overflow="hidden" mb={4}>
       <Image
@@ -22,7 +24,8 @@ export const ShowDetails = ({ show }: IShowProps) => {
           {show.description}
         </Text>
         <Text pt="2" fontSize="sm">
-          {show.averageRating}
+          {reviews.reduce((acc, review) => acc + review.rating, 0) /
+            reviews.length || "No reviews yet"}
         </Text>
       </CardBody>
     </Card>

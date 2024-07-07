@@ -11,6 +11,7 @@ import {
 } from "@chakra-ui/react";
 import { IReview } from "../../../../typings/Review.type";
 import { StyledButton } from "../../../core/Button/Button";
+import { StarsRating } from "../../../shared/StarsRating/StarsRating";
 
 interface IReviewItemProps extends IReview {}
 
@@ -36,9 +37,9 @@ export const ReviewItem = ({
       </CardHeader>
       <CardBody py="0">
         <Text fontSize="sm">{comment ?? " User did not leave a comment."}</Text>
-        <Text fontSize="sm">{rating}/5</Text>
+        <StarsRating rating={rating} canInteract={false} />
       </CardBody>
-      <CardFooter>
+      <CardFooter py={0}>
         <StyledButton label="Remove" />
       </CardFooter>
     </Card>
