@@ -1,7 +1,9 @@
 "use client";
 
-import styles from "./page.module.css";
+import { IShow } from "./typings/Show.type";
+
+const mockShows: Array<IShow> = [];
 
 export default function Home() {
-  return <main className={styles.main}>works</main>;
+  return <main></main>;
 }
