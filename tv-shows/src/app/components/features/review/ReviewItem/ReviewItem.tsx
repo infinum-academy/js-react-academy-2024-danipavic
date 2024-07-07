@@ -2,7 +2,6 @@
 
 import {
   Avatar,
-  Button,
   Card,
   CardBody,
   CardFooter,
@@ -11,6 +10,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { IReview } from "../../../../typings/Review.type";
+import { StyledButton } from "../../../core/Button/Button";
 
 interface IReviewItemProps extends IReview {}
 
@@ -39,22 +39,7 @@ export const ReviewItem = ({
         <Text fontSize="sm">{rating}/5</Text>
       </CardBody>
       <CardFooter>
-        <Button
-          borderRadius="3xl"
-          variant="solid"
-          sx={{
-            bg: "white",
-            color: "black",
-            border: "1px solid white",
-            _hover: {
-              bg: "purple.700",
-              border: "1px solid white",
-              color: "white",
-            },
-          }}
-        >
-          Remove
-        </Button>
+        <StyledButton />
       </CardFooter>
     </Card>
   );
