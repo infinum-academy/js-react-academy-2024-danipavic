@@ -1,7 +1,7 @@
 "use client";
 
 import { Box } from "@chakra-ui/react";
-import { ReviewItem } from "./components/features/review/ReviewItem";
+import { ReviewList } from "./components/features/review/ReviewList/ReviewList";
 import { ShowDetails } from "./components/features/shows/ShowDetails/ShowDetails";
 import { IReview } from "./typings/Review.type";
 import { IShow } from "./typings/Show.type";
@@ -38,9 +38,7 @@ export default function Home() {
   return (
     <Box>
       <ShowDetails show={mockShow} />
-      {reviews.map((review, index) => (
-        <ReviewItem key={index} {...review} />
-      ))}
+      <ReviewList reviews={reviews} />
     </Box>
   );
 }

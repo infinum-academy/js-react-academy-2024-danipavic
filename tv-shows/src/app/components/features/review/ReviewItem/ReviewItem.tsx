@@ -10,7 +10,7 @@ import {
   Flex,
   Text,
 } from "@chakra-ui/react";
-import { IReview } from "../../../typings/Review.type";
+import { IReview } from "../../../../typings/Review.type";
 
 interface IReviewItemProps extends IReview {}
 
