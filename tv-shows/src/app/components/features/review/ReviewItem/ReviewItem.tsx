@@ -13,13 +13,16 @@ import { IReview } from "../../../../typings/Review.type";
 import { StyledButton } from "../../../core/Button/Button";
 import { StarsRating } from "../../../shared/StarsRating/StarsRating";
 
-interface IReviewItemProps extends IReview {}
+interface IReviewItemProps extends IReview {
+  onRemoveReview: () => void;
+}
 
 export const ReviewItem = ({
   reviewerAvatarURL,
   reviewerEmail,
   comment,
   rating,
+  onRemoveReview,
 }: IReviewItemProps) => {
   return (
     <Card
@@ -40,7 +43,7 @@ export const ReviewItem = ({
         <StarsRating rating={rating} canInteract={false} />
       </CardBody>
       <CardFooter py={0}>
-        <StyledButton label="Remove" />
+        <StyledButton onRemoveReview={onRemoveReview} label="Remove" />
       </CardFooter>
     </Card>
   );

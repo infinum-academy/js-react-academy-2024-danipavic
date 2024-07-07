@@ -2,17 +2,22 @@
 
 import { Button } from "@chakra-ui/react";
 
+interface IStyledButtonProps {
+  label: string;
+  type?: "button" | "submit";
+  onRemoveReview?: () => void;
+}
+
 export const StyledButton = ({
   label,
   type = "button",
-}: {
-  label: string;
-  type?: "button" | "submit";
-}) => (
+  onRemoveReview,
+}: IStyledButtonProps) => (
   <Button
     borderRadius="3xl"
     mb={4}
     variant="solid"
+    onClick={onRemoveReview}
     type={type}
     sx={{
       bg: "white",

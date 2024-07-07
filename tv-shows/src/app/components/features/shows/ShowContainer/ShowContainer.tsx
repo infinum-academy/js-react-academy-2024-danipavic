@@ -24,10 +24,20 @@ export default function ShowContainer() {
     setReviews((reviews: Array<IReview>) => [...reviews, review]);
   };
 
+  const onRemoveReview = (review: IReview) => {
+    setReviews((reviews: Array<IReview>) =>
+      reviews.filter((currentReview) => currentReview.uuid !== review.uuid)
+    );
+  };
+
   return (
     <>
       <ShowDetails show={mockShow} reviews={reviews} />
-      <ShowReviewSection reviews={reviews} onAddReview={onAddReview} />
+      <ShowReviewSection
+        reviews={reviews}
+        onAddReview={onAddReview}
+        onRemoveReview={onRemoveReview}
+      />
     </>
   );
 }
