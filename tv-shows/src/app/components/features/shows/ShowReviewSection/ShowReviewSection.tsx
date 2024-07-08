@@ -1,5 +1,6 @@
 "use client";
 
+import { Heading } from "@chakra-ui/react";
 import { IReview } from "../../../../typings/Review.type";
 import { ReviewForm } from "../../review/ReviewForm/ReviewForm";
 import { ReviewList } from "../../review/ReviewList/ReviewList";
@@ -17,6 +18,9 @@ export const ShowReviewSection = ({
 }: IShowReviewSectionProps) => {
   return (
     <>
+      <Heading color="white" size="lg" mb={4}>
+        Reviews
+      </Heading>
       <ReviewForm onAddReview={onAddReview} reviews={reviews} />
       <ReviewList reviews={reviews} onRemoveReview={onRemoveReview} />
     </>
