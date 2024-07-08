@@ -1,23 +1,26 @@
 "use client";
 
 import { Button } from "@chakra-ui/react";
+import { IReview } from "../../../typings/Review.type";
 
 interface IStyledButtonProps {
   label: string;
   type?: "button" | "submit";
-  onRemoveReview?: () => void;
+  review: IReview;
+  onRemoveReview?: (review: IReview) => void;
 }
 
 export const StyledButton = ({
   label,
   type = "button",
+  review,
   onRemoveReview,
 }: IStyledButtonProps) => (
   <Button
     borderRadius="3xl"
     mb={4}
     variant="solid"
-    onClick={onRemoveReview}
+    onClick={onRemoveReview?.bind(this, review)}
     type={type}
     sx={{
       bg: "white",

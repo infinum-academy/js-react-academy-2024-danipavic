@@ -3,16 +3,14 @@
 import { Input, Textarea } from "@chakra-ui/react";
 import { useState } from "react";
 import { IReview } from "../../../../typings/Review.type";
-import { saveToLocalStorage } from "../../../../utils/localstorage-helpers";
 import { StyledButton } from "../../../core/Button/Button";
 import { StarsRating } from "../../../shared/StarsRating/StarsRating";
 
 interface IReviewFormProps {
-  reviews: Array<IReview>;
   onAddReview: (review: IReview) => void;
 }
 
-export const ReviewForm = ({ onAddReview, reviews }: IReviewFormProps) => {
+export const ReviewForm = ({ onAddReview }: IReviewFormProps) => {
   const [selectedRating, setSelectedRating] = useState<number>(0);
 
   return (
@@ -37,14 +35,13 @@ export const ReviewForm = ({ onAddReview, reviews }: IReviewFormProps) => {
             rating: parseInt(ratingInput.value),
             uuid: window.crypto.randomUUID(),
             reviewerAvatarURL: "https://i.pravatar.cc/150?img=68",
-            reviewerEmail: "John Doe",
+            reviewerEmail: "dani.pavic@infinum.com",
           };
 
           commentInput.value = "";
           ratingInput.value = "";
 
           onAddReview(newReview);
-          saveToLocalStorage([...reviews, newReview]);
 
           setSelectedRating(0);
         }}

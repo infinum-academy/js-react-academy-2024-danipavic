@@ -25,10 +25,10 @@ export const ShowDetails = ({ show, reviews }: IShowProps) => {
         </Text>
         <Text pt="2" fontSize="sm">
           {reviews.length
-            ? `${
+            ? `${Math.round(
                 reviews.reduce((acc, review) => acc + review.rating, 0) /
-                reviews.length
-              } / 5`
+                  reviews.length
+              )} / 5`
             : "No reviews yet"}
         </Text>
       </CardBody>

@@ -3,7 +3,10 @@
 import { useEffect, useState } from "react";
 import { IReview } from "../../../../typings/Review.type";
 import { IShow } from "../../../../typings/Show.type";
-import { loadFromLocalStorage } from "../../../../utils/localstorage-helpers";
+import {
+  loadFromLocalStorage,
+  saveToLocalStorage,
+} from "../../../../utils/localstorage-helpers";
 import { ShowDetails } from "../ShowDetails/ShowDetails";
 import { ShowReviewSection } from "../ShowReviewSection/ShowReviewSection";
 
@@ -15,20 +18,22 @@ const mockShow: IShow = {
 };
 
 export default function ShowContainer() {
-  const [reviews, setReviews] = useState<Array<IReview>>([]);
+  const [reviews, setReviews] = useState<Array<IReview>>(
+    loadFromLocalStorage()
+  );
 
   useEffect(() => {
-    setReviews(loadFromLocalStorage());
-  }, []);
+    saveToLocalStorage(reviews);
+  }, [reviews]);
 
   const onAddReview = (review: IReview) => {
     setReviews((reviews: Array<IReview>) => [...reviews, review]);
   };
 
   const onRemoveReview = (review: IReview) => {
-    setReviews((reviews: Array<IReview>) =>
-      reviews.filter((currentReview) => currentReview.uuid !== review.uuid)
-    );
+    setReviews((reviews: Array<IReview>) => [
+      ...reviews.filter((currentReview) => currentReview.uuid !== review.uuid),
+    ]);
   };
 
   return (
