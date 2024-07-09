@@ -13,7 +13,7 @@ interface IStyledButtonProps {
 export const StyledButton = ({ label, type = 'button', review, onRemoveReview }: IStyledButtonProps) => (
 	<Button
 		borderRadius="3xl"
-		mb={4}
+		mb="4"
 		variant="solid"
 		onClick={() => {
 			if (review && onRemoveReview) {
