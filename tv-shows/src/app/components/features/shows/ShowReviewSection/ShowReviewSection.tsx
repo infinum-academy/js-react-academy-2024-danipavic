@@ -6,7 +6,7 @@ import { ReviewForm } from "../../review/ReviewForm/ReviewForm";
 import { ReviewList } from "../../review/ReviewList/ReviewList";
 
 interface IShowReviewSectionProps {
-  reviews: Array<IReview>;
+  reviews?: Array<IReview>;
   onAddReview: (review: IReview) => void;
   onRemoveReview: (review: IReview) => void;
 }

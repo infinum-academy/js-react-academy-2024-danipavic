@@ -18,20 +18,29 @@ const mockShow: IShow = {
 };
 
 export default function ShowContainer() {
-  const [reviews, setReviews] = useState<Array<IReview>>(
-    loadFromLocalStorage()
-  );
+  const [reviews, setReviews] = useState<Array<IReview>>();
 
   useEffect(() => {
+    const reviews = loadFromLocalStorage();
+
+    setReviews(reviews);
+  }, []);
+
+  useEffect(() => {
+    if (!reviews) return;
     saveToLocalStorage(reviews);
   }, [reviews]);
 
   const onAddReview = (review: IReview) => {
-    setReviews((reviews: Array<IReview>) => [...reviews, review]);
+    if (!reviews) return;
+
+    setReviews([...reviews, review]);
   };
 
   const onRemoveReview = (review: IReview) => {
-    setReviews((reviews: Array<IReview>) => [
+    if (!reviews) return;
+
+    setReviews([
       ...reviews.filter((currentReview) => currentReview.uuid !== review.uuid),
     ]);
   };

@@ -6,7 +6,7 @@ import { IShow } from "../../../../typings/Show.type";
 
 interface IShowProps {
   show: IShow;
-  reviews: Array<IReview>;
+  reviews?: Array<IReview>;
 }
 
 export const ShowDetails = ({ show, reviews }: IShowProps) => {
@@ -24,7 +24,7 @@ export const ShowDetails = ({ show, reviews }: IShowProps) => {
           {show.description}
         </Text>
         <Text pt="2" fontSize="sm">
-          {reviews.length
+          {reviews?.length
             ? `${Math.round(
                 reviews.reduce((acc, review) => acc + review.rating, 0) /
                   reviews.length
