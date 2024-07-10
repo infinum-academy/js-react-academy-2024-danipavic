@@ -1,6 +1,6 @@
 'use client';
 
-import { TopRatedShowsContainer } from '../components/features/shows/TopRatedShowsContainer.tsx/TopRatedShowsContainer';
+import { TopRatedShowsContainer } from '../../components/features/shows/TopRatedShowsContainer.tsx/TopRatedShowsContainer';
 
 export default function TopRatedShowsPage() {
 	return <TopRatedShowsContainer />;

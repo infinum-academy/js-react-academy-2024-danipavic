@@ -14,5 +14,5 @@ export function getOneShow(id: string) {
 }
 
 export function getManyTopRatedShows() {
-	return fetcher<IShow>('/api/shows/top-rated');
+	return fetcher<IShowsResponse>('/api/shows/top-rated');
 }
