@@ -10,14 +10,12 @@ interface IShowCardProps {
 
 export const ShowsList = ({ shows }: IShowCardProps) => {
 	return (
-		<>
-			<Wrap justify="center" spacing="6">
-				{shows.map((show) => (
-					<WrapItem key={show.id}>
-						<ShowCard {...show} />
-					</WrapItem>
-				))}
-			</Wrap>
-		</>
+		<Wrap justify="center" spacing="6">
+			{shows.map((show) => (
+				<WrapItem key={show.id}>
+					<ShowCard {...show} />
+				</WrapItem>
+			))}
+		</Wrap>
 	);
 };
