@@ -11,9 +11,11 @@ interface IShowProps {
 
 export const ShowDetails = ({ show, reviews }: IShowProps) => {
 	return (
-		<Card borderRadius="2xl" overflow="hidden" mb={4}>
+		<Card borderRadius="2xl" h="340px" overflow="hidden" mb={4}>
 			<Image
-				src={show.imageUrl}
+				src={show.image_url}
+				width="100%"
+				height="69%"
 				alt="Show image"
 				fallbackSrc="
           https://fakeimg.pl/1920x1080/fcfcfc/322659?text=Missing+show+cover"

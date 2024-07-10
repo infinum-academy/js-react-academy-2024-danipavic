@@ -13,7 +13,6 @@ export const ShowCard = (show: IShow) => {
 				alt="Show image"
 				width="100%"
 				height="69%"
-				objectFit="cover"
 				fallbackSrc="
           https://fakeimg.pl/1920x1080/fcfcfc/322659?text=Missing+show+cover"
 			/>
