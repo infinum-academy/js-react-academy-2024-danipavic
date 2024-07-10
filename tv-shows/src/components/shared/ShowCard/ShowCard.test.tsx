@@ -1,14 +1,8 @@
-/**
- * check if show title is rendered
- * check if correct average rating is rendered
- */
-
-import { render, screen, waitFor } from '@testing-library/react';
-import { ClassAttributes, ImgHTMLAttributes } from 'react';
+import { render, screen } from '@testing-library/react';
 import { IShow } from '../../../typings/Show.type';
 import { ShowCard } from './ShowCard';
 
-describe('TodoItem', () => {
+describe('ShowCard', () => {
 	const mockShow: IShow = {
 		id: '1',
 		title: 'Test Show',
@@ -18,7 +12,7 @@ describe('TodoItem', () => {
 		average_rating: 4.5,
 	};
 
-	it('should render the image with correct URL', async () => {
+	it('should render the image with correct URL', () => {
 		render(<ShowCard {...mockShow} />);
 
 		expect(screen.getByRole('img')).toBeInTheDocument();
