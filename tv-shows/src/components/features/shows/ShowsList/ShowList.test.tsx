@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { IShow } from '../../../../typings/Show.type';
 import { ShowsList } from './ShowsList';
 
-describe('TodoItem', () => {
+describe('ShowList', () => {
 	const mockShows: Array<IShow> = [
 		{
 			id: '1',
