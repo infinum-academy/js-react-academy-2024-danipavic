@@ -12,19 +12,19 @@ import { ShowDetails } from '../ShowDetails/ShowDetails';
 import { ShowReviewSection } from '../ShowReviewSection/ShowReviewSection';
 
 export default function ShowContainer() {
-	const { id } = useParams<{ id: string }>();
-	const { data, error, isLoading } = useSWR(`/api/shows/${id}`, () => getOneShow(id));
+	const { id: showID } = useParams<{ id: string }>();
+	const { data, error, isLoading } = useSWR(`/api/shows/${showID}`, () => getOneShow(showID));
 	const [reviews, setReviews] = useState<Array<IReview>>();
 
 	useEffect(() => {
-		setReviews(loadFromLocalStorage());
-	}, []);
+		setReviews(loadFromLocalStorage()?.reviews?.[showID] ?? []);
+	}, [showID]);
 
 	useEffect(() => {
 		if (!reviews) return;
 
-		saveToLocalStorage(reviews);
-	}, [reviews]);
+		saveToLocalStorage({ reviews: { ...loadFromLocalStorage().reviews, [showID]: reviews } });
+	}, [reviews, showID]);
 
 	const onAddReview = (review: IReview) => {
 		if (!reviews) return;
