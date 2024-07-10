@@ -4,10 +4,7 @@ export interface IShow {
 	title: string;
 	description: string;
 	id: string;
-	imageUrl?: string;
-}
-
-export interface IShowWithReviews {
-	show: IShow;
-	reviews: Array<IReview>;
+	no_of_reviews: number;
+	average_rating: number;
+	image_url?: string;
 }

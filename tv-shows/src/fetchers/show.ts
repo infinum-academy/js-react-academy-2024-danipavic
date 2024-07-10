@@ -2,13 +2,17 @@ import { fetcher } from '@/fetchers/fetcher';
 import { IShow } from '../typings/Show.type';
 
 interface IShowsResponse {
-	todoLists: Array<IShow>;
+	shows: Array<IShow>;
 }
 
-export function getShows() {
-	return fetcher<IShowsResponse>('/api/todo-lists');
+export function getManyShows() {
+	return fetcher<IShowsResponse>('/api/shows');
 }
 
-export function getTodoList(id: string) {
-	return fetcher<IShow>(`/api/todo-lists/${id}`);
+export function getOneShow(id: string) {
+	return fetcher<IShow>(`/api/shows/${id}`);
+}
+
+export function getManyTopRatedShows() {
+	return fetcher<IShow>('/api/shows/top-rated');
 }

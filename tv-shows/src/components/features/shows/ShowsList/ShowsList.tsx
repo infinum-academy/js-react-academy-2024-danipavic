@@ -1,18 +1,23 @@
 'use client';
 
-import { IShowWithReviews } from '../../../../typings/Show.type';
+import { Wrap, WrapItem } from '@chakra-ui/react';
+import { IShow } from '../../../../typings/Show.type';
 import { ShowCard } from '../../../shared/ShowCard/ShowCard';
 
 interface IShowCardProps {
-	shows: Array<IShowWithReviews>;
+	shows: Array<IShow>;
 }
 
 export const ShowsList = ({ shows }: IShowCardProps) => {
 	return (
 		<>
-			{shows.map(({ show, reviews }) => (
-				<ShowCard key={show.id} show={show} reviews={reviews} />
-			))}
+			<Wrap justify="center" spacing="6">
+				{shows.map((show) => (
+					<WrapItem key={show.id}>
+						<ShowCard {...show} />
+					</WrapItem>
+				))}
+			</Wrap>
 		</>
 	);
 };

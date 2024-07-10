@@ -1,21 +1,15 @@
 'use client';
 
-import { Card, CardBody, Flex, Heading, Icon, Image, Text } from '@chakra-ui/react';
-import { IReview } from '../../../typings/Review.type';
+import { Card, CardBody, Flex, Heading, Icon, Image, Text, VStack } from '@chakra-ui/react';
 import NextLink from 'next/link';
-import { IShow } from '../../../typings/Show.type';
 import { MdOutlineStarPurple500 } from 'react-icons/md';
+import { IShow } from '../../../typings/Show.type';
 
-interface IShowCardProps {
-	show: IShow;
-	reviews?: Array<IReview>;
-}
-
-export const ShowCard = ({ show, reviews }: IShowCardProps) => {
+export const ShowCard = (show: IShow) => {
 	return (
-		<Card as={NextLink} href={`/all-shows/${show.id}`} maxW="240px" h="340px" borderRadius="2xl" overflow="hidden">
+		<Card as={NextLink} href={`/all-shows/${show.id}`} w="240px" h="340px" borderRadius="2xl" overflow="hidden">
 			<Image
-				src={show.imageUrl}
+				src={show.image_url}
 				alt="Show image"
 				width="100%"
 				height="69%"
@@ -24,15 +18,13 @@ export const ShowCard = ({ show, reviews }: IShowCardProps) => {
           https://fakeimg.pl/1920x1080/fcfcfc/322659?text=Missing+show+cover"
 			/>
 			<CardBody color="purple.700">
-				<Heading size="md">{show.title}</Heading>
-				<Flex align="center">
-					<Icon as={MdOutlineStarPurple500} />
-					<Text fontSize="sm">
-						{reviews?.length
-							? `${Math.round(reviews.reduce((acc, review) => acc + review.rating, 0) / reviews.length)} / 5`
-							: 'No reviews yet'}
-					</Text>
-				</Flex>
+				<VStack align="flex-start" height="100%">
+					<Heading size="md">{show.title}</Heading>
+					<Flex align="center">
+						<Icon as={MdOutlineStarPurple500} />
+						<Text fontSize="sm">{show.average_rating ?? 0} / 5</Text>
+					</Flex>
+				</VStack>
 			</CardBody>
 		</Card>
 	);
