@@ -16,6 +16,7 @@ export const ShowDetails = ({ show, reviews }: IShowProps) => {
 				src={show.image_url}
 				width="100%"
 				maxHeight="50%"
+				objectFit="cover"
 				alt="Show image"
 				fallbackSrc="
           https://fakeimg.pl/1920x1080/fcfcfc/322659?text=Missing+show+cover"
