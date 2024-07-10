@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { ReviewForm } from './ReviewForm';
 
 describe('ReviewForm', () => {
-	fit('should render all form elements', () => {
+	it('should render all form elements', () => {
 		const mockOnAddReview = jest.fn();
 
 		render(<ReviewForm onAddReview={mockOnAddReview} />);
