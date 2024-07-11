@@ -1,3 +1,5 @@
+'use client';
+
 import useSWR from 'swr';
 import { getManyTopRatedShows } from '../../../../fetchers/show';
 import { Loader } from '../../../shared/Loader/Loader';

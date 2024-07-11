@@ -3,7 +3,7 @@
 import { Input, Text, Textarea } from '@chakra-ui/react';
 import { useState } from 'react';
 import { IReview } from '../../../../typings/Review.type';
-import { StyledButton } from '../../../core/Button/Button';
+import { StyledButton } from '../../../core/StyledButton/StyledButton';
 import { StarsRating } from '../../../shared/StarsRating/StarsRating';
 
 interface IReviewFormProps {
@@ -57,7 +57,7 @@ export const ReviewForm = ({ onAddReview }: IReviewFormProps) => {
 					</Text>
 				)}
 				<StarsRating canInteract={true} rating={selectedRating} setSelectedRating={setSelectedRating} />
-				<StyledButton type="submit" label="Post" />
+				<StyledButton type="submit">Post</StyledButton>
 			</form>
 		</>
 	);

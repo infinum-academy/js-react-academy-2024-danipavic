@@ -32,10 +32,10 @@ export default function ShowContainer() {
 		setReviews([...reviews, review]);
 	};
 
-	const onRemoveReview = (review: IReview) => {
+	const onRemoveReview = (uuid: string) => {
 		if (!reviews) return;
 
-		setReviews([...reviews.filter((currentReview) => currentReview.uuid !== review.uuid)]);
+		setReviews([...reviews.filter((currentReview) => currentReview.uuid !== uuid)]);
 	};
 
 	if (error) {
