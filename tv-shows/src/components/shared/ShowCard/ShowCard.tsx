@@ -1,5 +1,3 @@
-'use client';
-
 import { Card, CardBody, Flex, Heading, Icon, Image, Text, VStack } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import { MdOutlineStarPurple500 } from 'react-icons/md';

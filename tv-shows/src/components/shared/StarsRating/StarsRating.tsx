@@ -27,7 +27,7 @@ export const StarsRating = ({ rating, canInteract = false, setSelectedRating }: 
 			{Array.from({ length: 5 }, (_, index) => (
 				<Box
 					key={index}
-					data-testid={index < rating && 'selected'}
+					data-testid={index < rating && 'highlighted-star'}
 					color={getStarsColor(canInteract, rating, hoveredRating, index)}
 					fontSize="2xl"
 					cursor={canInteract ? 'pointer' : 'default'}

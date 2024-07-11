@@ -1,5 +1,3 @@
-'use client';
-
 import { Flex, Heading, Icon } from '@chakra-ui/react';
 import { MdLiveTv } from 'react-icons/md';
 

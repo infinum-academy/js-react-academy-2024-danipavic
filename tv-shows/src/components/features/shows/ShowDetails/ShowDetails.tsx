@@ -1,5 +1,3 @@
-'use client';
-
 import { Card, CardBody, Heading, Image, Text } from '@chakra-ui/react';
 import { IReview } from '../../../../typings/Review.type';
 import { IShow } from '../../../../typings/Show.type';

@@ -27,7 +27,7 @@ describe('ReviewItem', () => {
 	it('should render correct rating', () => {
 		render(<ReviewItem onRemoveReview={mockOnRemoveReview} {...mockReview} />);
 
-		expect(screen.getAllByTestId('selected').length).toBe(mockReview.rating);
+		expect(screen.getAllByTestId('highlighted-star').length).toBe(mockReview.rating);
 	});
 
 	it('should call onRemove with correct data', () => {

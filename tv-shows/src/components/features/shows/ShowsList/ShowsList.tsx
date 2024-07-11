@@ -1,5 +1,3 @@
-'use client';
-
 import { Wrap, WrapItem } from '@chakra-ui/react';
 import { IShow } from '../../../../typings/Show.type';
 import { ShowCard } from '../../../shared/ShowCard/ShowCard';
