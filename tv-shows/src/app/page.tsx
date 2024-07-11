@@ -1,7 +1,5 @@
-"use client";
-
-import ShowContainer from "./components/features/shows/ShowContainer/ShowContainer";
+import { redirect } from 'next/navigation';
 
 export default function Home() {
-  return <ShowContainer />;
+	redirect('/all-shows');
 }

@@ -1,30 +1,32 @@
-import { Box } from "@chakra-ui/react";
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import { Header } from "./components/shared/Header/Header";
-import { Providers } from "./providers";
+import { Container, Flex } from '@chakra-ui/react';
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import { SidebarNavigation } from '../components/shared/SidebarNavigation/SidebarNavigation';
+import { Providers } from './providers';
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: "TV Shows app",
+	title: 'TV Shows app',
 };
 
 export default function RootLayout({
-  children,
+	children,
 }: Readonly<{
-  children: React.ReactNode;
+	children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en">
-      <body className={inter.className}>
-        <Providers>
-          <Box as="main" maxW="70vw" mx="auto">
-            <Header />
-            {children}
-          </Box>
-        </Providers>
-      </body>
-    </html>
-  );
+	return (
+		<html lang="en">
+			<body className={inter.className}>
+				<Providers>
+					<Flex height="100vh">
+						<SidebarNavigation />
+						<Container as="main" maxW="100%" mx="auto" p="6" overflowY="scroll">
+							{children}
+						</Container>
+					</Flex>
+				</Providers>
+			</body>
+		</html>
+	);
 }
