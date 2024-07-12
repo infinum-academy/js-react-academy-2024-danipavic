@@ -9,10 +9,6 @@ import {
 	FormErrorMessage,
 	FormHelperText,
 	FormLabel,
-	Icon,
-	Input,
-	InputGroup,
-	InputLeftAddon,
 	Text,
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
@@ -22,8 +18,10 @@ import { MdAccountCircle, MdLock } from 'react-icons/md';
 import useSWRMutation from 'swr/mutation';
 import { mutator } from '../../../../fetchers/mutators';
 import { swrKeys } from '../../../../fetchers/swrKeys';
+import { IconInput } from '../../../core/IconInput/IconInput';
 import { Header } from '../../../shared/Header/Header';
 import { Loader } from '../../../shared/Loader/Loader';
+import { AuthFormCard } from '../AuthFormCard/AuthFormCard';
 
 interface IRegisterFormInputs {
 	email: string;
@@ -32,7 +30,7 @@ interface IRegisterFormInputs {
 }
 
 export const RegisterForm = () => {
-	const [registered, setRegistered] = useState(true);
+	const [registered, setRegistered] = useState(false);
 	const [matchingPasswords, setMatchingPasswords] = useState(true);
 	const { register, handleSubmit } = useForm<IRegisterFormInputs>();
 	const { trigger, isMutating } = useSWRMutation(swrKeys.register, mutator, {
@@ -66,94 +64,59 @@ export const RegisterForm = () => {
 		);
 	} else {
 		return (
-			<Flex
-				align="center"
-				justify="center"
-				color="white"
-				backgroundColor="purple.800"
-				borderRadius="2xl"
-				padding="14"
-				width="fit-content"
-			>
-				{!registered && (
-					<Flex direction="column" alignItems="center">
-						<Header />
-						<chakra.form
-							display="flex"
-							flexDirection="column"
-							alignItems="center"
-							gap={4}
-							onSubmit={handleSubmit(onRegister)}
-						>
-							<FormControl isRequired={true}>
-								<FormLabel>Email</FormLabel>
-								<InputGroup size="lg">
-									<InputLeftAddon backgroundColor="transparent" borderEndStartRadius="3xl" borderStartStartRadius="3xl">
-										<Icon as={MdAccountCircle} />
-									</InputLeftAddon>
-									<Input
-										{...register('email')}
-										required
-										type="email"
-										borderRadius="3xl"
-										borderLeft="none"
-										placeholder="Email"
-									/>
-								</InputGroup>
-							</FormControl>
-							<FormControl isRequired={true}>
-								<FormLabel>Password</FormLabel>
-								<InputGroup size="lg">
-									<InputLeftAddon backgroundColor="transparent" borderEndStartRadius="3xl" borderStartStartRadius="3xl">
-										<Icon as={MdLock} />
-									</InputLeftAddon>
-									<Input
-										{...register('password')}
-										required
-										type="password"
-										borderRadius="3xl"
-										placeholder="Password"
-										backgroundColor="transparent"
-										borderLeft="none"
-										borderEndStartRadius="3xl"
-										borderStartStartRadius="3xl"
-									/>
-								</InputGroup>
-								<FormHelperText color="white">At least 8 characters</FormHelperText>
-							</FormControl>
-							<FormControl isRequired={true} isInvalid={!matchingPasswords} mb="4">
-								<FormLabel>Confirm password</FormLabel>
-								<InputGroup size="lg">
-									<InputLeftAddon backgroundColor="transparent" borderEndStartRadius="3xl" borderStartStartRadius="3xl">
-										<Icon as={MdLock} />
-									</InputLeftAddon>
-									<Input
-										{...register('password_confirmation')}
-										required
-										type="password"
-										borderRadius="3xl"
-										borderLeft="none"
-										placeholder="Confirm password"
-										backgroundColor="transparent"
-										borderEndStartRadius="3xl"
-										borderStartStartRadius="3xl"
-									/>
-								</InputGroup>
-								<FormErrorMessage color="white">Password must match</FormErrorMessage>
-							</FormControl>
-							<Button type="submit" mb="2" borderRadius="3xl" color="purple.700" paddingY="6" paddingX="8">
-								SIGN UP
-							</Button>
-							<Text>
-								Already have an account?
-								<Text as={NextLink} ml="2" href="/auth/login" fontWeight="bold">
-									Login
-								</Text>
+			!registered && (
+				<AuthFormCard>
+					<chakra.form
+						display="flex"
+						flexDirection="column"
+						alignItems="center"
+						gap={4}
+						onSubmit={handleSubmit(onRegister)}
+					>
+						<FormControl isRequired={true}>
+							<FormLabel>Email</FormLabel>
+							<IconInput<IRegisterFormInputs>
+								icon={MdAccountCircle}
+								type="email"
+								formControlName="email"
+								register={register}
+								placeholder="Email"
+							/>
+						</FormControl>
+						<FormControl isRequired={true}>
+							<FormLabel>Password</FormLabel>
+							<IconInput<IRegisterFormInputs>
+								icon={MdLock}
+								type="password"
+								formControlName="password"
+								register={register}
+								placeholder="Password"
+							/>
+							<FormHelperText color="white">At least 8 characters</FormHelperText>
+						</FormControl>
+						<FormControl isRequired={true} isInvalid={!matchingPasswords} mb="4">
+							<FormLabel>Confirm password</FormLabel>
+							<IconInput<IRegisterFormInputs>
+								icon={MdLock}
+								type="password"
+								formControlName="password_confirmation"
+								register={register}
+								placeholder="Confirm password"
+							/>
+							<FormErrorMessage color="white">Password must match</FormErrorMessage>
+						</FormControl>
+						<Button type="submit" mb="2" borderRadius="3xl" color="purple.700" paddingY="6" paddingX="8">
+							SIGN UP
+						</Button>
+						<Text>
+							Already have an account?
+							<Text as={NextLink} ml="2" href="/auth/login" fontWeight="bold">
+								Login
 							</Text>
-						</chakra.form>
-					</Flex>
-				)}
-			</Flex>
+						</Text>
+					</chakra.form>
+				</AuthFormCard>
+			)
 		);
 	}
 };
