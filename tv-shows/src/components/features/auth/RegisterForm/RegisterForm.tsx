@@ -4,7 +4,6 @@ import {
 	Alert,
 	Button,
 	chakra,
-	Flex,
 	FormControl,
 	FormErrorMessage,
 	FormHelperText,
@@ -19,7 +18,6 @@ import useSWRMutation from 'swr/mutation';
 import { mutator } from '../../../../fetchers/mutators';
 import { swrKeys } from '../../../../fetchers/swrKeys';
 import { IconInput } from '../../../core/IconInput/IconInput';
-import { Header } from '../../../shared/Header/Header';
 import { Loader } from '../../../shared/Loader/Loader';
 import { AuthFormCard } from '../AuthFormCard/AuthFormCard';
 
