@@ -20,7 +20,6 @@ interface ILoginFormInputs {
 
 export const LoginForm = () => {
 	const { register, handleSubmit } = useForm<ILoginFormInputs>();
-	// TODO Why does this keep firing?
 	const { mutate } = useSWR(swrKeys.user, fetcher);
 	const { trigger, isMutating, error } = useSWRMutation(swrKeys.login, mutator, {
 		onSuccess: (data) => {
