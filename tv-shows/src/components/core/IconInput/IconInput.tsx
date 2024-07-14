@@ -1,6 +1,10 @@
-import { Icon, Input, InputGroup, InputLeftAddon } from '@chakra-ui/react';
+'use client';
+
+import { Icon, Input, InputGroup, InputLeftAddon, InputRightElement } from '@chakra-ui/react';
+import { useEffect, useRef, useState } from 'react';
 import { FieldValues, Path, UseFormRegister } from 'react-hook-form';
 import { IconType } from 'react-icons';
+import { FaEye, FaEyeSlash } from 'react-icons/fa6';
 
 interface IIconInputProps<T extends FieldValues> {
 	icon: IconType;
@@ -17,6 +21,18 @@ export function IconInput<T extends FieldValues>({
 	formControlName,
 	register,
 }: IIconInputProps<T>) {
+	const [showPassword, setShowPassword] = useState(false);
+	const inputRef = useRef<HTMLInputElement>(null);
+	const handleTogglePassword = () => {
+		setShowPassword((showPassword) => !showPassword);
+	};
+
+	useEffect(() => {
+		if (inputRef.current) {
+			inputRef.current.setAttribute('type', showPassword ? 'text' : 'password');
+		}
+	}, [showPassword]);
+
 	return (
 		<InputGroup size="lg">
 			<InputLeftAddon backgroundColor="transparent" borderEndStartRadius="3xl" borderStartStartRadius="3xl">
@@ -24,6 +40,7 @@ export function IconInput<T extends FieldValues>({
 			</InputLeftAddon>
 			<Input
 				{...register(formControlName)}
+				ref={inputRef}
 				required
 				type={type}
 				borderRadius="3xl"
@@ -33,6 +50,11 @@ export function IconInput<T extends FieldValues>({
 				borderEndStartRadius="3xl"
 				borderStartStartRadius="3xl"
 			/>
+			{type === 'password' && (
+				<InputRightElement onClick={handleTogglePassword}>
+					<Icon color="white" as={showPassword ? FaEyeSlash : FaEye} />
+				</InputRightElement>
+			)}
 		</InputGroup>
 	);
 }
