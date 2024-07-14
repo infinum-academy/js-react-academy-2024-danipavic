@@ -18,7 +18,7 @@ import { ShowReviewSection } from '../ShowReviewSection/ShowReviewSection';
 
 export default function ShowContainer() {
 	const { id: showID } = useParams<{ id: string }>();
-	const { data, error, isLoading } = useSWR(`/api/shows/${showID}`, () => getOneShow(showID));
+	const { data, error, isLoading } = useSWR(`/api/shows/${showID}`, () => getOneShow(showID).then(({ show }) => show));
 	const [reviews, setReviews] = useState<Array<IReview>>();
 
 	useEffect(() => {
@@ -30,7 +30,7 @@ export default function ShowContainer() {
 
 		saveToLocalStorage<ILocalStorageShowsReviews>(REVIEWS_LOCAL_STORAGE_KEY, {
 			reviews: {
-				...loadFromLocalStorage<ILocalStorageShowsReviews>(REVIEWS_LOCAL_STORAGE_KEY).reviews,
+				...loadFromLocalStorage<ILocalStorageShowsReviews>(REVIEWS_LOCAL_STORAGE_KEY)?.reviews,
 				[showID]: reviews,
 			},
 		});
