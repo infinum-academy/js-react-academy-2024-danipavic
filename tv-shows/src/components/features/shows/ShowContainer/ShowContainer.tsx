@@ -4,9 +4,14 @@ import { Box } from '@chakra-ui/react';
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import useSWR from 'swr';
+import { REVIEWS_LOCAL_STORAGE_KEY } from '../../../../constants';
 import { getOneShow } from '../../../../fetchers/show';
 import { IReview } from '../../../../typings/Review.type';
-import { loadFromLocalStorage, saveToLocalStorage } from '../../../../utils/localstorage-helpers';
+import {
+	ILocalStorageShowsReviews,
+	loadFromLocalStorage,
+	saveToLocalStorage,
+} from '../../../../utils/localstorage-helpers';
 import { Loader } from '../../../shared/Loader/Loader';
 import { ShowDetails } from '../ShowDetails/ShowDetails';
 import { ShowReviewSection } from '../ShowReviewSection/ShowReviewSection';
@@ -17,13 +22,18 @@ export default function ShowContainer() {
 	const [reviews, setReviews] = useState<Array<IReview>>();
 
 	useEffect(() => {
-		setReviews(loadFromLocalStorage()?.reviews?.[showID] ?? []);
+		setReviews(loadFromLocalStorage<ILocalStorageShowsReviews>(REVIEWS_LOCAL_STORAGE_KEY)?.reviews?.[showID] ?? []);
 	}, [showID]);
 
 	useEffect(() => {
 		if (!reviews) return;
 
-		saveToLocalStorage({ reviews: { ...loadFromLocalStorage().reviews, [showID]: reviews } });
+		saveToLocalStorage<ILocalStorageShowsReviews>(REVIEWS_LOCAL_STORAGE_KEY, {
+			reviews: {
+				...loadFromLocalStorage<ILocalStorageShowsReviews>(REVIEWS_LOCAL_STORAGE_KEY).reviews,
+				[showID]: reviews,
+			},
+		});
 	}, [reviews, showID]);
 
 	const onAddReview = (review: IReview) => {

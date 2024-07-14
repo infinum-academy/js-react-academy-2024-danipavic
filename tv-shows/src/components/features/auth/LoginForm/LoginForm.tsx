@@ -23,7 +23,9 @@ export const LoginForm = () => {
 	// TODO Why does this keep firing?
 	const { mutate } = useSWR(swrKeys.user, fetcher);
 	const { trigger, isMutating, error } = useSWRMutation(swrKeys.login, mutator, {
-		onSuccess: (data) => mutate(data, { revalidate: false }),
+		onSuccess: (data) => {
+			mutate(data, { revalidate: false });
+		},
 	});
 	const onLogin = (data: ILoginFormInputs) => {
 		trigger(data);
