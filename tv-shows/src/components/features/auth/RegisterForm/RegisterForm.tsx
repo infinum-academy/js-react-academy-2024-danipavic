@@ -30,7 +30,11 @@ interface IRegisterFormInputs {
 export const RegisterForm = () => {
 	const [registered, setRegistered] = useState(false);
 	const [matchingPasswords, setMatchingPasswords] = useState(true);
-	const { register, handleSubmit } = useForm<IRegisterFormInputs>();
+	const {
+		register,
+		handleSubmit,
+		formState: { isSubmitting },
+	} = useForm<IRegisterFormInputs>();
 	const { trigger, isMutating } = useSWRMutation(swrKeys.register, mutator, {
 		onSuccess: () => {
 			setRegistered(true);
@@ -71,7 +75,7 @@ export const RegisterForm = () => {
 						gap={4}
 						onSubmit={handleSubmit(onRegister)}
 					>
-						<FormControl isRequired={true}>
+						<FormControl isRequired={true} isDisabled={isSubmitting}>
 							<FormLabel>Email</FormLabel>
 							<IconInput<IRegisterFormInputs>
 								icon={MdAccountCircle}
@@ -81,7 +85,7 @@ export const RegisterForm = () => {
 								placeholder="Email"
 							/>
 						</FormControl>
-						<FormControl isRequired={true}>
+						<FormControl isRequired={true} isDisabled={isSubmitting}>
 							<FormLabel>Password</FormLabel>
 							<IconInput<IRegisterFormInputs>
 								icon={MdLock}
@@ -92,7 +96,7 @@ export const RegisterForm = () => {
 							/>
 							<FormHelperText color="white">At least 8 characters</FormHelperText>
 						</FormControl>
-						<FormControl isRequired={true} isInvalid={!matchingPasswords} mb="4">
+						<FormControl isRequired={true} isInvalid={!matchingPasswords} isDisabled={isSubmitting} mb="4">
 							<FormLabel>Confirm password</FormLabel>
 							<IconInput<IRegisterFormInputs>
 								icon={MdLock}
@@ -103,7 +107,17 @@ export const RegisterForm = () => {
 							/>
 							<FormErrorMessage color="white">Password must match</FormErrorMessage>
 						</FormControl>
-						<Button type="submit" mb="2" borderRadius="3xl" color="purple.700" paddingY="6" paddingX="8">
+						<Button
+							type="submit"
+							mb="2"
+							borderRadius="3xl"
+							isLoading={isSubmitting}
+							disabled={isSubmitting}
+							loadingText="Registering"
+							color="purple.700"
+							paddingY="6"
+							paddingX="8"
+						>
 							SIGN UP
 						</Button>
 						<Text>

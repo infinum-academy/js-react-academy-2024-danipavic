@@ -20,9 +20,7 @@ interface IRatingFormInputs {
 
 export const ReviewForm = ({ onAddReview }: IReviewFormProps) => {
 	const [selectedRating, setSelectedRating] = useState<number>(0);
-	const [isFormDisabled, setIsFormDisabled] = useState(false);
 	const userData = loadFromLocalStorage<ILocalStorageAuth>(AUTH_LOCAL_STORAGE_KEY);
-
 	const {
 		register,
 		handleSubmit,
@@ -30,7 +28,7 @@ export const ReviewForm = ({ onAddReview }: IReviewFormProps) => {
 		setError,
 		clearErrors,
 		resetField,
-		formState: { errors },
+		formState: { errors, isSubmitting },
 	} = useForm<IRatingFormInputs>();
 
 	useEffect(() => {
@@ -38,12 +36,10 @@ export const ReviewForm = ({ onAddReview }: IReviewFormProps) => {
 	}, [selectedRating, setValue]);
 
 	const onReviewSubmit = (formData: IRatingFormInputs) => {
-		setIsFormDisabled(true);
 		const { comment, rating } = formData;
 
 		if (!rating || !comment) {
 			setError('rating', { type: 'custom', message: 'Please fill in all fields' });
-			setIsFormDisabled(false);
 			return;
 		} else {
 			clearErrors('rating');
@@ -63,21 +59,22 @@ export const ReviewForm = ({ onAddReview }: IReviewFormProps) => {
 		onAddReview(newReview);
 
 		setSelectedRating(0);
-		setIsFormDisabled(false);
 	};
 
 	return (
 		<>
 			<chakra.form onSubmit={handleSubmit(onReviewSubmit)}>
-				<FormControl isRequired={true} isDisabled={isFormDisabled}>
+				<FormControl isRequired={true} isDisabled={isSubmitting}>
 					<Textarea borderRadius="2xl" backgroundColor="white" placeholder="Add a review" {...register('comment')} />
 				</FormControl>
-				<FormControl isRequired={true} isDisabled={isFormDisabled} isInvalid={Boolean(errors)}>
+				<FormControl isRequired={true} isDisabled={isSubmitting} isInvalid={Boolean(errors)}>
 					<Input value={selectedRating ?? 0} type="number" readOnly display="none" {...register('rating')} />
 					<FormErrorMessage color="red.500">{errors.rating?.message}</FormErrorMessage>
 				</FormControl>
-				<StarsRating canInteract={!isFormDisabled} rating={selectedRating} setSelectedRating={setSelectedRating} />
-				<StyledButton type="submit">Post</StyledButton>
+				<StarsRating canInteract={!isSubmitting} rating={selectedRating} setSelectedRating={setSelectedRating} />
+				<StyledButton type="submit" isLoading={isSubmitting} loadingText="Submitting">
+					Post
+				</StyledButton>
 			</chakra.form>
 		</>
 	);

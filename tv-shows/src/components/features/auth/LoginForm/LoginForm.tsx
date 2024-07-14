@@ -19,7 +19,11 @@ interface ILoginFormInputs {
 }
 
 export const LoginForm = () => {
-	const { register, handleSubmit } = useForm<ILoginFormInputs>();
+	const {
+		register,
+		handleSubmit,
+		formState: { isSubmitting },
+	} = useForm<ILoginFormInputs>();
 	const { mutate } = useSWR(swrKeys.user, fetcher);
 	const { trigger, isMutating, error } = useSWRMutation(swrKeys.login, mutator, {
 		onSuccess: (data) => {
@@ -38,7 +42,7 @@ export const LoginForm = () => {
 		<VStack>
 			<AuthFormCard>
 				<chakra.form display="flex" flexDirection="column" alignItems="center" gap={4} onSubmit={handleSubmit(onLogin)}>
-					<FormControl isRequired={true}>
+					<FormControl isRequired={true} isDisabled={isSubmitting}>
 						<FormLabel>Email</FormLabel>
 						<IconInput<ILoginFormInputs>
 							icon={MdAccountCircle}
@@ -48,7 +52,7 @@ export const LoginForm = () => {
 							placeholder="Email"
 						/>
 					</FormControl>
-					<FormControl isRequired={true}>
+					<FormControl isRequired={true} isDisabled={isSubmitting}>
 						<FormLabel>Password</FormLabel>
 						<IconInput<ILoginFormInputs>
 							icon={MdLock}
@@ -58,7 +62,17 @@ export const LoginForm = () => {
 							placeholder="Password"
 						/>
 					</FormControl>
-					<Button type="submit" mb="2" borderRadius="3xl" color="purple.700" paddingY="6" paddingX="8">
+					<Button
+						isLoading={isSubmitting}
+						disabled={isSubmitting}
+						loadingText="Logging in"
+						type="submit"
+						mb="2"
+						borderRadius="3xl"
+						color="purple.700"
+						paddingY="6"
+						paddingX="8"
+					>
 						LOG IN
 					</Button>
 					<Text>
