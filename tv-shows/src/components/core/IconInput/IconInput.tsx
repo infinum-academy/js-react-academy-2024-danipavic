@@ -21,17 +21,16 @@ export function IconInput<T extends FieldValues>({
 	formControlName,
 	register,
 }: IIconInputProps<T>) {
-	const [showPassword, setShowPassword] = useState(false);
-	const inputRef = useRef<HTMLInputElement>(null);
+	const [showPassword, setShowPassword] = useState(type !== 'password');
+	const [inputType, setInputType] = useState(type);
+
+	useEffect(() => {
+		setInputType(showPassword ? 'text' : 'password');
+	}, [showPassword]);
+
 	const handleTogglePassword = () => {
 		setShowPassword((showPassword) => !showPassword);
 	};
-
-	useEffect(() => {
-		if (inputRef.current) {
-			inputRef.current.setAttribute('type', showPassword ? 'text' : 'password');
-		}
-	}, [showPassword]);
 
 	return (
 		<InputGroup size="lg">
@@ -40,9 +39,8 @@ export function IconInput<T extends FieldValues>({
 			</InputLeftAddon>
 			<Input
 				{...register(formControlName)}
-				ref={inputRef}
 				required
-				type={type}
+				type={inputType}
 				borderRadius="3xl"
 				borderLeft="none"
 				placeholder={placeholder}
