@@ -4,14 +4,14 @@ import { Alert, Button, chakra, FormControl, FormLabel, Text, VStack } from '@ch
 import NextLink from 'next/link';
 import { useForm } from 'react-hook-form';
 import { MdAccountCircle, MdLock } from 'react-icons/md';
-import useSWR, { mutate } from 'swr';
+import useSWR from 'swr';
 import useSWRMutation from 'swr/mutation';
+import { fetcher } from '../../../../fetchers/fetcher';
 import { mutator } from '../../../../fetchers/mutators';
 import { swrKeys } from '../../../../fetchers/swrKeys';
 import { IconInput } from '../../../core/IconInput/IconInput';
 import { Loader } from '../../../shared/Loader/Loader';
 import { AuthFormCard } from '../AuthFormCard/AuthFormCard';
-import { fetcher } from '../../../../fetchers/fetcher';
 
 interface ILoginFormInputs {
 	email: string;

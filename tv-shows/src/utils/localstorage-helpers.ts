@@ -15,11 +15,11 @@ export const saveToLocalStorage = <T>(key: string, resource: T) => {
 	localStorage.setItem(key, JSON.stringify(resource));
 };
 
-export const loadFromLocalStorage = <T>(key: string): T => {
+export const loadFromLocalStorage = <T>(key: string): T | null => {
 	const resource = localStorage.getItem(key);
 
 	if (!resource) {
-		return { [key]: {} } as T;
+		return null;
 	}
 
 	return JSON.parse(resource);

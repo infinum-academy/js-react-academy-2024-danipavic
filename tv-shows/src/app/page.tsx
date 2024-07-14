@@ -1,4 +1,5 @@
+import { redirect } from 'next/navigation';
+
 export default function Home() {
-	// TODO Remove
-	// redirect('/all-shows');
+	redirect('/all-shows');
 }

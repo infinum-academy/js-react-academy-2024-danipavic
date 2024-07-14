@@ -1,4 +1,4 @@
-import { AUTH_STORAGE_KEY } from '../constants';
+import { AUTH_LOCAL_STORAGE_KEY } from '../constants';
 import { ILocalStorageAuth, saveToLocalStorage } from '../utils/localstorage-helpers';
 
 export async function mutator(url: string, { arg }: { arg: any }) {
@@ -12,7 +12,7 @@ export async function mutator(url: string, { arg }: { arg: any }) {
 
 	const data = await response.json();
 
-	saveToLocalStorage<ILocalStorageAuth>(AUTH_STORAGE_KEY, {
+	saveToLocalStorage<ILocalStorageAuth>(AUTH_LOCAL_STORAGE_KEY, {
 		Uid: response.headers.get('uid'),
 		Client: response.headers.get('client'),
 		'Access-token': response.headers.get('access-token'),

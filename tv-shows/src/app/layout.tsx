@@ -20,8 +20,7 @@ export default function RootLayout({
 			<body className={inter.className}>
 				<Providers>
 					<Flex height="100vh">
-						{/* TODO Fix this when authredirect is added */}
-						{false && <SidebarNavigation />}
+						<SidebarNavigation />
 						<Container as="main" maxW="100%" mx="auto" p="6" overflowY="scroll">
 							{children}
 						</Container>
