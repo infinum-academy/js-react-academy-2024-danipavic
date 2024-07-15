@@ -12,7 +12,7 @@ import {
 	loadFromLocalStorage,
 	saveToLocalStorage,
 } from '../../../../utils/localstorage-helpers';
-import { ErrorIndicator } from '../../../shared/ErrorIndicator/ErrorIndicator';
+import { ErrorMessage } from '../../../shared/ErrorMessage/ErrorMessage';
 import { Loader } from '../../../shared/Loader/Loader';
 import { ShowDetails } from '../ShowDetails/ShowDetails';
 import { ShowReviewSection } from '../ShowReviewSection/ShowReviewSection';
@@ -50,7 +50,7 @@ export default function ShowContainer() {
 	};
 
 	if (error) {
-		return <ErrorIndicator />;
+		return <ErrorMessage />;
 	}
 
 	if (isLoading || !data) {
