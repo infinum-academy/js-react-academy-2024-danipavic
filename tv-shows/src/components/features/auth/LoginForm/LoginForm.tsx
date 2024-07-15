@@ -27,19 +27,21 @@ export const LoginForm = () => {
 	} = useForm<ILoginFormInputs>();
 	const { mutate } = useSWR(swrKeys.user, getUser);
 	const { trigger, isMutating, error } = useSWRMutation(swrKeys.login, loginUser(), {
-		onSuccess: ({ data, headers }) => {
+		onSuccess: async (data) => {
+			const headers = data.headers;
+
 			const uid = headers.get('uid');
 			const client = headers.get('client');
 			const access_token = headers.get('access-token');
 
-			if (uid || client || access_token) {
+			if (uid && client && access_token) {
 				saveToLocalStorage<ILocalStorageAuth>(AUTH_LOCAL_STORAGE_KEY, {
 					Uid: uid,
 					Client: client,
 					'Access-token': access_token,
 				});
 			}
-			mutate(data, { revalidate: false });
+			mutate(await data.json(), { revalidate: false });
 		},
 	});
 	const onLogin = (data: ILoginFormInputs) => {

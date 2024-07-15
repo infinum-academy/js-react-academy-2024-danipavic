@@ -21,7 +21,7 @@ import { IconInput } from '../../../core/IconInput/IconInput';
 import { Loader } from '../../../shared/Loader/Loader';
 import { AuthFormCard } from '../AuthFormCard/AuthFormCard';
 
-interface IRegisterFormInputs {
+export interface IRegisterFormInputs {
 	email: string;
 	password: string;
 	password_confirmation: string;
@@ -36,7 +36,8 @@ export const RegisterForm = () => {
 		formState: { isSubmitting },
 	} = useForm<IRegisterFormInputs>();
 	const { trigger, isMutating } = useSWRMutation(swrKeys.register, registerUser(), {
-		onSuccess: () => {
+		onSuccess: async (data) => {
+			await data.json();
 			setRegistered(true);
 		},
 	});
