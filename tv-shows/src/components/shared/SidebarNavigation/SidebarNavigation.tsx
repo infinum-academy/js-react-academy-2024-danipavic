@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import useSWR from 'swr';
 import { AUTH_LOCAL_STORAGE_KEY } from '../../../constants';
-import { fetcher } from '../../../fetchers/fetcher';
+import { getUser } from '../../../fetchers/auth';
 import { swrKeys } from '../../../fetchers/swrKeys';
 import { ILocalStorageAuth, loadFromLocalStorage } from '../../../utils/localstorage-helpers';
 import { Header } from '../Header/Header';
@@ -14,7 +14,7 @@ import { Header } from '../Header/Header';
 export const SidebarNavigation = () => {
 	const pathname = usePathname();
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
-	const { mutate, data } = useSWR(swrKeys.user, fetcher);
+	const { mutate, data } = useSWR(swrKeys.user, getUser);
 
 	useEffect(() => {
 		setIsLoggedIn(Boolean(loadFromLocalStorage<ILocalStorageAuth>(AUTH_LOCAL_STORAGE_KEY)));

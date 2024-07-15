@@ -15,7 +15,7 @@ export function getManyShows() {
 }
 
 export function getOneShow(id: string) {
-	return fetcher<IShowResponse>(`${swrKeys.shows}/${id}`);
+	return fetcher<IShowResponse>(swrKeys.show(id));
 }
 
 export function getManyTopRatedShows() {

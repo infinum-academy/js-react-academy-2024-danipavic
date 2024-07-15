@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import { MdAccountCircle, MdLock } from 'react-icons/md';
 import useSWR from 'swr';
 import useSWRMutation from 'swr/mutation';
-import { fetcher } from '../../../../fetchers/fetcher';
+import { getUser } from '../../../../fetchers/auth';
 import { mutator } from '../../../../fetchers/mutators';
 import { swrKeys } from '../../../../fetchers/swrKeys';
 import { IconInput } from '../../../core/IconInput/IconInput';
@@ -24,7 +24,7 @@ export const LoginForm = () => {
 		handleSubmit,
 		formState: { isSubmitting },
 	} = useForm<ILoginFormInputs>();
-	const { mutate } = useSWR(swrKeys.user, fetcher);
+	const { mutate } = useSWR(swrKeys.user, getUser);
 	const { trigger, isMutating, error } = useSWRMutation(swrKeys.login, mutator, {
 		onSuccess: (data) => {
 			mutate(data, { revalidate: false });

@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import useSWR from 'swr';
-import { fetcher } from '../../../fetchers/fetcher';
+import { getUser } from '../../../fetchers/auth';
 import { swrKeys } from '../../../fetchers/swrKeys';
 
 interface IAuthRedirectProps {
@@ -12,7 +12,7 @@ interface IAuthRedirectProps {
 
 export const AuthRedirect = ({ invert = false }: IAuthRedirectProps) => {
 	const router = useRouter();
-	const { data, isLoading } = useSWR(swrKeys.user, fetcher);
+	const { data, isLoading } = useSWR(swrKeys.user, getUser);
 
 	useEffect(() => {
 		if (isLoading) {
