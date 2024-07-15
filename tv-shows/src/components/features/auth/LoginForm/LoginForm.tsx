@@ -6,9 +6,10 @@ import { useForm } from 'react-hook-form';
 import { MdAccountCircle, MdLock } from 'react-icons/md';
 import useSWR from 'swr';
 import useSWRMutation from 'swr/mutation';
-import { getUser } from '../../../../fetchers/auth';
-import { mutator } from '../../../../fetchers/mutators';
+import { AUTH_LOCAL_STORAGE_KEY } from '../../../../constants';
+import { getUser, loginUser } from '../../../../fetchers/auth';
 import { swrKeys } from '../../../../fetchers/swrKeys';
+import { ILocalStorageAuth, saveToLocalStorage } from '../../../../utils/localstorage-helpers';
 import { IconInput } from '../../../core/IconInput/IconInput';
 import { Loader } from '../../../shared/Loader/Loader';
 import { AuthFormCard } from '../AuthFormCard/AuthFormCard';
@@ -25,8 +26,19 @@ export const LoginForm = () => {
 		formState: { isSubmitting },
 	} = useForm<ILoginFormInputs>();
 	const { mutate } = useSWR(swrKeys.user, getUser);
-	const { trigger, isMutating, error } = useSWRMutation(swrKeys.login, mutator, {
-		onSuccess: (data) => {
+	const { trigger, isMutating, error } = useSWRMutation(swrKeys.login, loginUser(), {
+		onSuccess: ({ data, headers }) => {
+			const uid = headers.get('uid');
+			const client = headers.get('client');
+			const access_token = headers.get('access-token');
+
+			if (uid || client || access_token) {
+				saveToLocalStorage<ILocalStorageAuth>(AUTH_LOCAL_STORAGE_KEY, {
+					Uid: uid,
+					Client: client,
+					'Access-token': access_token,
+				});
+			}
 			mutate(data, { revalidate: false });
 		},
 	});

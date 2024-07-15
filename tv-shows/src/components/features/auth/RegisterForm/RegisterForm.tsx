@@ -15,7 +15,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { MdAccountCircle, MdLock } from 'react-icons/md';
 import useSWRMutation from 'swr/mutation';
-import { mutator } from '../../../../fetchers/mutators';
+import { registerUser } from '../../../../fetchers/auth';
 import { swrKeys } from '../../../../fetchers/swrKeys';
 import { IconInput } from '../../../core/IconInput/IconInput';
 import { Loader } from '../../../shared/Loader/Loader';
@@ -35,7 +35,7 @@ export const RegisterForm = () => {
 		handleSubmit,
 		formState: { isSubmitting },
 	} = useForm<IRegisterFormInputs>();
-	const { trigger, isMutating } = useSWRMutation(swrKeys.register, mutator, {
+	const { trigger, isMutating } = useSWRMutation(swrKeys.register, registerUser(), {
 		onSuccess: () => {
 			setRegistered(true);
 		},
