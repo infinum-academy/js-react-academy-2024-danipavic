@@ -3,6 +3,7 @@
 import { Button, VStack } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import useSWR from 'swr';
 import { AUTH_LOCAL_STORAGE_KEY } from '../../../constants';
 import { fetcher } from '../../../fetchers/fetcher';
@@ -12,13 +13,17 @@ import { Header } from '../Header/Header';
 
 export const SidebarNavigation = () => {
 	const pathname = usePathname();
-	const { mutate } = useSWR(swrKeys.user, fetcher);
+	const [isLoggedIn, setIsLoggedIn] = useState(false);
+	const { mutate, data } = useSWR(swrKeys.user, fetcher);
 
-	const isLoggedIn = loadFromLocalStorage<ILocalStorageAuth>(AUTH_LOCAL_STORAGE_KEY);
+	useEffect(() => {
+		setIsLoggedIn(Boolean(loadFromLocalStorage<ILocalStorageAuth>(AUTH_LOCAL_STORAGE_KEY)));
+	}, [data]);
 
 	const onLogout = () => {
-		localStorage.removeItem(AUTH_LOCAL_STORAGE_KEY);
 		mutate(null, { revalidate: false });
+		setIsLoggedIn(false);
+		localStorage.removeItem(AUTH_LOCAL_STORAGE_KEY);
 	};
 
 	return (
