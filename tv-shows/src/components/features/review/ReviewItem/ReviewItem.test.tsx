@@ -1,7 +1,3 @@
-/**
- * check if onDelete callback has been called only once with the necessary data
- */
-
 import { render, screen } from '@testing-library/react';
 import { IReview } from '../../../../typings/Review.type';
 import { ReviewItem } from './ReviewItem';
@@ -17,7 +13,7 @@ describe('ReviewItem', () => {
 	const mockOnRemoveReview = jest.fn();
 
 	it('should render correct user email, comment, and button', () => {
-		render(<ReviewItem onRemoveReview={mockOnRemoveReview} {...mockReview} />);
+		render(<ReviewItem onRemoveReview={mockOnRemoveReview} review={mockReview} />);
 
 		expect(screen.getByTestId('review-email').innerHTML).toBe(mockReview.reviewerEmail);
 		expect(screen.getByTestId('review-comment').innerHTML).toBe(mockReview.comment);
@@ -25,18 +21,18 @@ describe('ReviewItem', () => {
 	});
 
 	it('should render correct rating', () => {
-		render(<ReviewItem onRemoveReview={mockOnRemoveReview} {...mockReview} />);
+		render(<ReviewItem onRemoveReview={mockOnRemoveReview} review={mockReview} />);
 
 		expect(screen.getAllByTestId('highlighted-star').length).toBe(mockReview.rating);
 	});
 
 	it('should call onRemove with correct data', () => {
-		render(<ReviewItem onRemoveReview={mockOnRemoveReview} {...mockReview} />);
+		render(<ReviewItem onRemoveReview={mockOnRemoveReview} review={mockReview} />);
 
 		const removeButton = screen.getByRole('button');
 		removeButton.click();
 
 		expect(mockOnRemoveReview).toHaveBeenCalledTimes(1);
-		expect(mockOnRemoveReview).toHaveBeenCalledWith(mockReview);
+		expect(mockOnRemoveReview).toHaveBeenCalledWith(mockReview.uuid);
 	});
 });
