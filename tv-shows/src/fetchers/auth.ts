@@ -11,8 +11,8 @@ export interface IUserResponse {
 	user: IUser;
 }
 
-export function getUser() {
-	return fetcher<IUserResponse>(swrKeys.user);
+export function getUser(url: string) {
+	return fetcher<IUserResponse>(url);
 }
 
 export function registerUser(url: string, { arg }: { arg: any }) {

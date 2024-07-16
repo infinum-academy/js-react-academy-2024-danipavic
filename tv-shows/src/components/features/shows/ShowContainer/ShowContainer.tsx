@@ -13,11 +13,11 @@ import { ShowReviewSection } from '../ShowReviewSection/ShowReviewSection';
 
 export default function ShowContainer() {
 	const { id: showID } = useParams<{ id: string }>();
-	const { data, error, isLoading } = useSWR(`${swrKeys.shows}/${showID}`, () =>
-		getOneShow(showID).then(({ show }) => show)
+	const { data, error, isLoading } = useSWR(`${swrKeys.show(showID)}`, (key: string) =>
+		getOneShow(key).then(({ show }) => show)
 	);
-	const { data: reviews } = useSWR(swrKeys.showReviews(showID), () =>
-		getManyReviews(showID).then(({ reviews }) => reviews)
+	const { data: reviews } = useSWR(swrKeys.showReviews(showID), (key: string) =>
+		getManyReviews(key).then(({ reviews }) => reviews)
 	);
 
 	if (error) {

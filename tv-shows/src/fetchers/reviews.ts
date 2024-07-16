@@ -1,14 +1,13 @@
 import { IReview } from '../typings/Review.type';
 import { fetcher } from './fetcher';
 import { mutator } from './mutators';
-import { swrKeys } from './swrKeys';
 
 interface IReviewsResponse {
 	reviews: Array<IReview>;
 }
 
-export function getManyReviews(showID: string | number) {
-	return fetcher<IReviewsResponse>(swrKeys.showReviews(showID));
+export function getManyReviews(url: string) {
+	return fetcher<IReviewsResponse>(url);
 }
 
 export function createReview(url: string, { arg }: { arg: any }) {
