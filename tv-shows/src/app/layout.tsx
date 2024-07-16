@@ -19,12 +19,7 @@ export default function RootLayout({
 		<html lang="en">
 			<body className={inter.className}>
 				<Providers>
-					<Flex height="100vh">
-						<SidebarNavigation />
-						<Container as="main" maxW="100%" mx="auto" p="6" overflowY="scroll">
-							{children}
-						</Container>
-					</Flex>
+					<Flex height="100vh">{children}</Flex>
 				</Providers>
 			</body>
 		</html>
