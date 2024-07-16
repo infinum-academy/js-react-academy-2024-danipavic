@@ -1,11 +1,14 @@
 'use client';
 
 import { Avatar, Card, CardBody, CardFooter, CardHeader, Flex, Text } from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
 import { mutate } from 'swr';
 import useSWRMutation from 'swr/mutation';
+import { AUTH_LOCAL_STORAGE_KEY } from '../../../../constants';
 import { deleteReview } from '../../../../fetchers/reviews';
 import { swrKeys } from '../../../../fetchers/swrKeys';
 import { IReview } from '../../../../typings/Review.type';
+import { ILocalStorageAuth, loadFromLocalStorage } from '../../../../utils/localstorage-helpers';
 import { StyledButton } from '../../../core/StyledButton/StyledButton';
 import { StarsRating } from '../../../shared/StarsRating/StarsRating';
 
@@ -14,11 +17,16 @@ interface IReviewItemProps {
 }
 
 export const ReviewItem = ({ review }: IReviewItemProps) => {
+	const [userID, setUserID] = useState<string>();
 	const { trigger } = useSWRMutation(`${swrKeys.reviews}/${review.id}`, deleteReview, {
 		onSuccess: () => {
 			mutate(swrKeys.showReviews(review.show_id));
 		},
 	});
+
+	useEffect(() => {
+		setUserID(loadFromLocalStorage<ILocalStorageAuth>(AUTH_LOCAL_STORAGE_KEY)?.Uid ?? '');
+	}, []);
 
 	return (
 		<Card bgColor="purple.700" color="white" borderRadius="2xl" overflow="hidden" mb={4}>
@@ -37,7 +45,7 @@ export const ReviewItem = ({ review }: IReviewItemProps) => {
 				<StarsRating rating={review.rating} canInteract={false} />
 			</CardBody>
 			<CardFooter py={0}>
-				<StyledButton onClick={() => trigger()}>Remove</StyledButton>
+				{userID === review.user.email && <StyledButton onClick={() => trigger()}>Remove</StyledButton>}
 			</CardFooter>
 		</Card>
 	);
