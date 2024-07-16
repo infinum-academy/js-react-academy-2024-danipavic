@@ -6,8 +6,9 @@ import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { mutate } from 'swr';
 import useSWRMutation from 'swr/mutation';
-import { createReview } from '../../../../fetchers/reviews';
+import { createReview, updateReview } from '../../../../fetchers/reviews';
 import { swrKeys } from '../../../../fetchers/swrKeys';
+import { IReview } from '../../../../typings/Review.type';
 import { StyledButton } from '../../../core/StyledButton/StyledButton';
 import { StarsRating } from '../../../shared/StarsRating/StarsRating';
 
@@ -16,11 +17,20 @@ interface IRatingFormInputs {
 	rating: number;
 }
 
-export const ReviewForm = () => {
-	const [selectedRating, setSelectedRating] = useState<number>(0);
+interface IReviewFormProps {
+	review?: IReview;
+	onSuccess?: () => void;
+}
+
+export const ReviewForm = ({ review, onSuccess }: IReviewFormProps) => {
+	const reviewMutator = review ? updateReview : createReview;
+	const reviewMutationKey = review ? `${swrKeys.reviews}/${review.id}` : swrKeys.reviews;
+
+	const [selectedRating, setSelectedRating] = useState<number>(review?.rating ?? 0);
 	const { id: showID } = useParams<{ id: string }>();
-	const { trigger } = useSWRMutation(swrKeys.reviews, createReview, {
+	const { trigger } = useSWRMutation(reviewMutationKey, reviewMutator, {
 		onSuccess: () => {
+			onSuccess && onSuccess();
 			mutate(swrKeys.showReviews(showID));
 		},
 	});
@@ -32,7 +42,7 @@ export const ReviewForm = () => {
 		clearErrors,
 		resetField,
 		formState: { errors, isSubmitting },
-	} = useForm<IRatingFormInputs>();
+	} = useForm<IRatingFormInputs>({ values: { comment: review?.comment ?? '', rating: review?.rating ?? 0 } });
 
 	useEffect(() => {
 		setValue('rating', selectedRating);
@@ -57,24 +67,26 @@ export const ReviewForm = () => {
 			show_id: showID,
 		});
 
-		setSelectedRating(0);
+		if (!review) {
+			setSelectedRating(0);
+		}
 	};
 
 	return (
-		<>
-			<chakra.form onSubmit={handleSubmit(onReviewSubmit)}>
-				<FormControl isRequired={true} isDisabled={isSubmitting}>
-					<Textarea borderRadius="2xl" backgroundColor="white" placeholder="Add a review" {...register('comment')} />
-				</FormControl>
-				<FormControl isRequired={true} isDisabled={isSubmitting} isInvalid={Boolean(errors)}>
-					<Input value={selectedRating ?? 0} type="number" readOnly display="none" {...register('rating')} />
-					<FormErrorMessage color="red.500">{errors.rating?.message}</FormErrorMessage>
-				</FormControl>
-				<StarsRating canInteract={!isSubmitting} rating={selectedRating} setSelectedRating={setSelectedRating} />
+		<chakra.form onSubmit={handleSubmit(onReviewSubmit)} id={review ? 'editReviewForm' : 'createReviewForm'}>
+			<FormControl isRequired={true} isDisabled={isSubmitting}>
+				<Textarea borderRadius="2xl" backgroundColor="white" placeholder="Add a review" {...register('comment')} />
+			</FormControl>
+			<FormControl isRequired={true} isDisabled={isSubmitting} isInvalid={Boolean(errors)}>
+				<Input value={selectedRating ?? 0} type="number" readOnly display="none" {...register('rating')} />
+				<FormErrorMessage color="red.500">{errors.rating?.message}</FormErrorMessage>
+			</FormControl>
+			<StarsRating canInteract={!isSubmitting} rating={selectedRating} setSelectedRating={setSelectedRating} />
+			{!review && (
 				<StyledButton type="submit" isLoading={isSubmitting} loadingText="Submitting">
 					Post
 				</StyledButton>
-			</chakra.form>
-		</>
+			)}
+		</chakra.form>
 	);
 };
