@@ -7,7 +7,7 @@ interface IReviewsResponse {
 	reviews: Array<IReview>;
 }
 
-export function getManyReviews(showID: string) {
+export function getManyReviews(showID: string | number) {
 	return fetcher<IReviewsResponse>(swrKeys.showReviews(showID));
 }
 

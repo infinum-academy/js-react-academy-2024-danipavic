@@ -6,7 +6,7 @@ export const swrKeys = {
 	user: `${apiUrl}/users/me`,
 	shows: `${apiUrl}/shows`,
 	show: (id: string) => `${apiUrl}/shows/${id}`,
-	showReviews: (id: string) => `${apiUrl}/shows/${id}/reviews`,
+	showReviews: (id: string | number) => `${apiUrl}/shows/${id}/reviews`,
 	reviews: `${apiUrl}/reviews`,
 	topRated: `${apiUrl}/shows/top_rated`,
 };

@@ -1,26 +1,29 @@
 'use client';
 
 import { chakra, FormControl, FormErrorMessage, Input, Textarea } from '@chakra-ui/react';
+import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { set, useForm } from 'react-hook-form';
-import { AUTH_LOCAL_STORAGE_KEY } from '../../../../constants';
-import { IReview } from '../../../../typings/Review.type';
-import { ILocalStorageAuth, loadFromLocalStorage } from '../../../../utils/localstorage-helpers';
+import { useForm } from 'react-hook-form';
+import { mutate } from 'swr';
+import useSWRMutation from 'swr/mutation';
+import { createReview } from '../../../../fetchers/reviews';
+import { swrKeys } from '../../../../fetchers/swrKeys';
 import { StyledButton } from '../../../core/StyledButton/StyledButton';
 import { StarsRating } from '../../../shared/StarsRating/StarsRating';
-
-interface IReviewFormProps {
-	onAddReview: (review: IReview) => void;
-}
 
 interface IRatingFormInputs {
 	comment: string;
 	rating: number;
 }
 
-export const ReviewForm = ({ onAddReview }: IReviewFormProps) => {
+export const ReviewForm = () => {
 	const [selectedRating, setSelectedRating] = useState<number>(0);
-	const userData = loadFromLocalStorage<ILocalStorageAuth>(AUTH_LOCAL_STORAGE_KEY);
+	const { id: showID } = useParams<{ id: string }>();
+	const { trigger } = useSWRMutation(swrKeys.reviews, createReview, {
+		onSuccess: () => {
+			mutate(swrKeys.showReviews(showID));
+		},
+	});
 	const {
 		register,
 		handleSubmit,
@@ -45,18 +48,14 @@ export const ReviewForm = ({ onAddReview }: IReviewFormProps) => {
 			clearErrors('rating');
 		}
 
-		const newReview: IReview = {
-			comment,
-			rating,
-			uuid: window.crypto.randomUUID(),
-			reviewerAvatarURL: 'https://i.pravatar.cc/150?img=68',
-			reviewerEmail: userData?.Uid || '',
-		};
-
 		resetField('comment');
 		resetField('rating');
 
-		onAddReview(newReview);
+		trigger({
+			comment,
+			rating,
+			show_id: showID,
+		});
 
 		setSelectedRating(0);
 	};

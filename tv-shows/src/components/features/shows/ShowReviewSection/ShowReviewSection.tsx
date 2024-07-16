@@ -7,18 +7,16 @@ import { ReviewList } from '../../review/ReviewList/ReviewList';
 
 interface IShowReviewSectionProps {
 	reviews?: Array<IReview>;
-	onAddReview: (review: IReview) => void;
-	onRemoveReview: (uuid: string) => void;
 }
 
-export const ShowReviewSection = ({ reviews, onAddReview, onRemoveReview }: IShowReviewSectionProps) => {
+export const ShowReviewSection = ({ reviews }: IShowReviewSectionProps) => {
 	return (
 		<>
 			<Heading color="white" size="lg" mb={4}>
 				Reviews
 			</Heading>
-			<ReviewForm onAddReview={onAddReview} />
-			<ReviewList reviews={reviews} onRemoveReview={onRemoveReview} />
+			<ReviewForm />
+			<ReviewList reviews={reviews} />
 		</>
 	);
 };
