@@ -26,7 +26,7 @@ export const LoginForm = () => {
 		formState: { isSubmitting },
 	} = useForm<ILoginFormInputs>();
 	const { mutate } = useSWR(swrKeys.user, getUser);
-	const { trigger, isMutating, error } = useSWRMutation(swrKeys.login, loginUser(), {
+	const { trigger, isMutating, error } = useSWRMutation(swrKeys.login, loginUser, {
 		onSuccess: async (data) => {
 			const headers = data.headers;
 

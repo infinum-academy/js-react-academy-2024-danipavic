@@ -1,10 +1,3 @@
-import { IReview } from '../typings/Review.type';
-
-export interface ILocalStorageShowsReviews {
-	reviews: {
-		[key: string]: Array<IReview>;
-	};
-}
 export interface ILocalStorageAuth {
 	Client: string | null;
 	Uid: string | null;

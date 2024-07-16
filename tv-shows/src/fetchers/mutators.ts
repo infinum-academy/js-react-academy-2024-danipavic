@@ -1,6 +1,6 @@
-export async function mutator(url: string, { arg }: { arg: any }) {
+export async function mutator(url: string, { arg }: { arg: any }, method = 'POST') {
 	const response = await fetch(url, {
-		method: 'POST',
+		method,
 		body: JSON.stringify(arg),
 		headers: {
 			'Content-Type': 'application/json',

@@ -15,9 +15,9 @@ export const ReviewItem = ({ review, onRemoveReview }: IReviewItemProps) => {
 		<Card bgColor="purple.700" color="white" borderRadius="2xl" overflow="hidden" mb={4}>
 			<CardHeader>
 				<Flex gap={2} align="center">
-					<Avatar src={review.reviewerAvatarURL} />
+					<Avatar src={review.user.image_url} />
 					<Text data-testid="review-email" fontSize="sm">
-						{review.reviewerEmail}
+						{review.user.email}
 					</Text>
 				</Flex>
 			</CardHeader>
@@ -28,7 +28,7 @@ export const ReviewItem = ({ review, onRemoveReview }: IReviewItemProps) => {
 				<StarsRating rating={review.rating} canInteract={false} />
 			</CardBody>
 			<CardFooter py={0}>
-				<StyledButton onClick={() => onRemoveReview(review.uuid)}>Remove</StyledButton>
+				<StyledButton onClick={() => onRemoveReview(review.id)}>Remove</StyledButton>
 			</CardFooter>
 		</Card>
 	);
