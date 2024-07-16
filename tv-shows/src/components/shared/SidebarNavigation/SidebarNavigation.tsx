@@ -21,9 +21,8 @@ export const SidebarNavigation = () => {
 	}, [data]);
 
 	const onLogout = () => {
-		mutate(null, { revalidate: false });
-		setIsLoggedIn(false);
 		localStorage.removeItem(AUTH_LOCAL_STORAGE_KEY);
+		mutate(undefined, { revalidate: false });
 	};
 
 	return (
