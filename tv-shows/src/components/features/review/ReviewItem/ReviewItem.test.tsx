@@ -1,7 +1,20 @@
-import { render, screen } from '@testing-library/react';
+import { act, render, screen, waitFor } from '@testing-library/react';
 import { IReview } from '../../../../typings/Review.type';
 import { ReviewItem } from './ReviewItem';
+import { deleteReview } from '../../../../fetchers/reviews';
+import { mutate } from 'swr';
 
+jest.mock('../../../../fetchers/reviews', () => {
+	return {
+		deleteReview: jest.fn().mockResolvedValue(null),
+	};
+});
+
+jest.mock('swr', () => {
+	return {
+		mutate: jest.fn(),
+	};
+});
 describe('ReviewItem', () => {
 	const mockReview: IReview = {
 		rating: 5,
@@ -25,10 +38,18 @@ describe('ReviewItem', () => {
 		expect(screen.getAllByTestId('highlighted-star').length).toBe(mockReview.rating);
 	});
 
-	it('should call onRemove with correct data', () => {
+	it('should call deleteReview and mutate on remove button click', async () => {
 		render(<ReviewItem review={mockReview} />);
 
 		const removeButton = screen.getByTestId('remove-review-button');
-		removeButton.click();
+
+		act(() => {
+			removeButton.click();
+		});
+
+		await waitFor(() => {
+			expect(deleteReview).toHaveBeenCalledTimes(1);
+			expect(mutate).toHaveBeenCalledTimes(1);
+		});
 	});
 });
