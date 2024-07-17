@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/react';
 import { IReview } from '../../../../typings/Review.type';
 import { StyledButton } from '../../../core/StyledButton/StyledButton';
-import { ReviewForm } from '../ReviewForm/ReviewForm';
+import { EditReviewContainer } from '../EditReviewContainer/EditReviewContainer';
 
 interface IEditReviewModalProps {
 	review: IReview;
@@ -28,7 +28,7 @@ export const EditReviewModal = ({ review }: IEditReviewModalProps) => {
 					<ModalHeader color="white">Edit review</ModalHeader>
 					<ModalCloseButton color="white" />
 					<ModalBody>
-						<ReviewForm review={review} onSuccess={() => onClose()} />
+						<EditReviewContainer review={review} onSuccess={onClose} />
 					</ModalBody>
 					<ModalFooter gap="4">
 						<StyledButton type="submit" form="editReviewForm" variant="outline" loadingText="Editing">

@@ -1,39 +1,25 @@
 'use client';
 
 import { chakra, FormControl, FormErrorMessage, Input, Textarea } from '@chakra-ui/react';
-import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { mutate } from 'swr';
-import useSWRMutation from 'swr/mutation';
-import { createReview, updateReview } from '../../../../fetchers/reviews';
-import { swrKeys } from '../../../../fetchers/swrKeys';
 import { IReview } from '../../../../typings/Review.type';
 import { StyledButton } from '../../../core/StyledButton/StyledButton';
 import { StarsRating } from '../../../shared/StarsRating/StarsRating';
 
-interface IRatingFormInputs {
+export interface IRatingFormInputs {
 	comment: string;
 	rating: number;
 }
 
 interface IReviewFormProps {
+	saveForm: (data: IRatingFormInputs) => void;
 	review?: IReview;
-	onSuccess?: () => void;
 }
 
-export const ReviewForm = ({ review, onSuccess }: IReviewFormProps) => {
-	const reviewMutator = review ? updateReview : createReview;
-	const reviewMutationKey = review ? `${swrKeys.reviews}/${review.id}` : swrKeys.reviews;
-
+export const ReviewForm = ({ review, saveForm }: IReviewFormProps) => {
 	const [selectedRating, setSelectedRating] = useState<number>(review?.rating ?? 0);
-	const { id: showID } = useParams<{ id: string }>();
-	const { trigger } = useSWRMutation(reviewMutationKey, reviewMutator, {
-		onSuccess: () => {
-			onSuccess && onSuccess();
-			mutate(swrKeys.showReviews(showID));
-		},
-	});
+
 	const {
 		register,
 		handleSubmit,
@@ -61,11 +47,7 @@ export const ReviewForm = ({ review, onSuccess }: IReviewFormProps) => {
 		resetField('comment');
 		resetField('rating');
 
-		trigger({
-			comment,
-			rating,
-			show_id: showID,
-		});
+		saveForm(formData);
 
 		if (!review) {
 			setSelectedRating(0);
