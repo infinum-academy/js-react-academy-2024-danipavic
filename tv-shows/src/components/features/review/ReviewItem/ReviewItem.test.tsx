@@ -1,8 +1,8 @@
 import { act, render, screen, waitFor } from '@testing-library/react';
+import { mutate } from 'swr';
+import { deleteReview } from '../../../../fetchers/reviews';
 import { IReview } from '../../../../typings/Review.type';
 import { ReviewItem } from './ReviewItem';
-import { deleteReview } from '../../../../fetchers/reviews';
-import { mutate } from 'swr';
 
 jest.mock('../../../../fetchers/reviews', () => {
 	return {

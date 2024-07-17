@@ -12,7 +12,7 @@ interface IAuthRedirectProps {
 
 export const AuthRedirect = ({ invert = false }: IAuthRedirectProps) => {
 	const router = useRouter();
-	const { data, isLoading } = useSWR(swrKeys.user, getUser);
+	const { data, isLoading } = useSWR(swrKeys.user, getUser, { refreshInterval: 5000 });
 
 	useEffect(() => {
 		if (isLoading) {

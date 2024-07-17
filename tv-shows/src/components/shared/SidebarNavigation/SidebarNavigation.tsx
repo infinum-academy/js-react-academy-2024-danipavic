@@ -13,7 +13,7 @@ import { Header } from '../Header/Header';
 export const SidebarNavigation = () => {
 	const pathname = usePathname();
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
-	const { mutate, data } = useSWR(swrKeys.user, getUser);
+	const { mutate, data } = useSWR(swrKeys.user, getUser, { refreshInterval: 5000 });
 
 	useEffect(() => {
 		setIsLoggedIn(data ? true : false);
@@ -21,7 +21,7 @@ export const SidebarNavigation = () => {
 
 	const onLogout = () => {
 		localStorage.removeItem(AUTH_LOCAL_STORAGE_KEY);
-		mutate(undefined, { revalidate: false });
+		mutate(undefined);
 	};
 
 	return (
