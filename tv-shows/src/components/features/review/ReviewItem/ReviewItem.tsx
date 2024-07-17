@@ -49,7 +49,9 @@ export const ReviewItem = ({ review }: IReviewItemProps) => {
 				{userID === review.user.email && (
 					<>
 						<EditReview review={review} />
-						<StyledButton onClick={() => trigger()}>Remove</StyledButton>
+						<StyledButton onClick={() => trigger()} data-testid="remove-review-button">
+							Remove
+						</StyledButton>
 					</>
 				)}
 			</CardFooter>
