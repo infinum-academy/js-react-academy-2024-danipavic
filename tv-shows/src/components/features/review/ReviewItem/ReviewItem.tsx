@@ -11,7 +11,7 @@ import { IReview } from '../../../../typings/Review.type';
 import { ILocalStorageAuth, loadFromLocalStorage } from '../../../../utils/localstorage-helpers';
 import { StyledButton } from '../../../core/StyledButton/StyledButton';
 import { StarsRating } from '../../../shared/StarsRating/StarsRating';
-import { EditReview } from '../EditReview/EditReview';
+import { EditReviewModal } from '../EditReviewModal/EditReviewModal';
 
 interface IReviewItemProps {
 	review: IReview;
@@ -48,7 +48,7 @@ export const ReviewItem = ({ review }: IReviewItemProps) => {
 			<CardFooter py="0" gap="4">
 				{userID === review.user.email && (
 					<>
-						<EditReview review={review} />
+						<EditReviewModal review={review} />
 						<StyledButton onClick={() => trigger()} data-testid="remove-review-button">
 							Remove
 						</StyledButton>

@@ -12,11 +12,11 @@ import { IReview } from '../../../../typings/Review.type';
 import { StyledButton } from '../../../core/StyledButton/StyledButton';
 import { ReviewForm } from '../ReviewForm/ReviewForm';
 
-interface IEditReviewProps {
+interface IEditReviewModalProps {
 	review: IReview;
 }
 
-export const EditReview = ({ review }: IEditReviewProps) => {
+export const EditReviewModal = ({ review }: IEditReviewModalProps) => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
 
 	return (
