@@ -16,7 +16,7 @@ export const SidebarNavigation = () => {
 	const { mutate, data } = useSWR(swrKeys.user, getUser, { refreshInterval: 5000 });
 
 	useEffect(() => {
-		setIsLoggedIn(data ? true : false);
+		setIsLoggedIn(Boolean(data));
 	}, [data]);
 
 	const onLogout = () => {
