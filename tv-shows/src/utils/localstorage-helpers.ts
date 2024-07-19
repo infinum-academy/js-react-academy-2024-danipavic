@@ -1,22 +1,19 @@
-import { REVIEWS_LOCAL_STORAGE_KEY } from '../constants';
-import { IReview } from '../typings/Review.type';
-
-interface ILocalStorageShowsReviews {
-	reviews: {
-		[key: string]: Array<IReview>;
-	};
+export interface ILocalStorageAuth {
+	Client: string | null;
+	Uid: string | null;
+	'Access-token': string | null;
 }
 
-export const saveToLocalStorage = (reviews: ILocalStorageShowsReviews) => {
-	localStorage.setItem(REVIEWS_LOCAL_STORAGE_KEY, JSON.stringify(reviews));
+export const saveToLocalStorage = <T>(key: string, resource: T) => {
+	localStorage.setItem(key, JSON.stringify(resource));
 };
 
-export const loadFromLocalStorage = (): ILocalStorageShowsReviews => {
-	const reviews = localStorage.getItem(REVIEWS_LOCAL_STORAGE_KEY);
+export const loadFromLocalStorage = <T>(key: string): T | null => {
+	const resource = localStorage.getItem(key);
 
-	if (!reviews) {
-		return { reviews: {} };
+	if (!resource) {
+		return null;
 	}
 
-	return JSON.parse(reviews);
+	return JSON.parse(resource);
 };

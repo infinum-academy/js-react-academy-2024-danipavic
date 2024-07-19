@@ -1,64 +1,74 @@
 'use client';
 
-import { Input, Text, Textarea } from '@chakra-ui/react';
-import { useState } from 'react';
+import { chakra, FormControl, FormErrorMessage, Input, Textarea } from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { IReview } from '../../../../typings/Review.type';
 import { StyledButton } from '../../../core/StyledButton/StyledButton';
 import { StarsRating } from '../../../shared/StarsRating/StarsRating';
 
-interface IReviewFormProps {
-	onAddReview: (review: IReview) => void;
+export interface IRatingFormInputs {
+	comment: string;
+	rating: number;
 }
 
-export const ReviewForm = ({ onAddReview }: IReviewFormProps) => {
-	const [selectedRating, setSelectedRating] = useState<number>(0);
-	const [error, setError] = useState<string | null>(null);
+interface IReviewFormProps {
+	saveForm: (data: IRatingFormInputs) => void;
+	review?: IReview;
+}
+
+export const ReviewForm = ({ review, saveForm }: IReviewFormProps) => {
+	const [selectedRating, setSelectedRating] = useState<number>(review?.rating ?? 0);
+
+	const {
+		register,
+		handleSubmit,
+		setValue,
+		setError,
+		clearErrors,
+		resetField,
+		formState: { errors, isSubmitting },
+	} = useForm<IRatingFormInputs>({ values: { comment: review?.comment ?? '', rating: review?.rating ?? 0 } });
+
+	useEffect(() => {
+		setValue('rating', selectedRating);
+	}, [selectedRating, setValue]);
+
+	const onReviewSubmit = (formData: IRatingFormInputs) => {
+		const { comment, rating } = formData;
+
+		if (!rating || !comment) {
+			setError('rating', { type: 'custom', message: 'Please fill in all fields' });
+			return;
+		} else {
+			clearErrors('rating');
+		}
+
+		resetField('comment');
+		resetField('rating');
+
+		saveForm(formData);
+
+		if (!review) {
+			setSelectedRating(0);
+		}
+	};
 
 	return (
-		<>
-			<form
-				onSubmit={(event) => {
-					event.preventDefault();
-
-					const target = event.target as HTMLFormElement;
-
-					const commentInput = target.elements.namedItem('comment') as HTMLInputElement;
-					const ratingInput = target.elements.namedItem('rating') as HTMLInputElement;
-
-					if (!parseInt(ratingInput.value) || !commentInput.value) {
-						setError('Please fill in all fields');
-
-						return;
-					} else {
-						setError(null);
-					}
-
-					const newReview: IReview = {
-						comment: commentInput.value,
-						rating: parseInt(ratingInput.value),
-						uuid: window.crypto.randomUUID(),
-						reviewerAvatarURL: 'https://i.pravatar.cc/150?img=68',
-						reviewerEmail: 'dani.pavic@infinum.com',
-					};
-
-					commentInput.value = '';
-					ratingInput.value = '';
-
-					onAddReview(newReview);
-
-					setSelectedRating(0);
-				}}
-			>
-				<Textarea borderRadius="2xl" backgroundColor="white" placeholder="Add a review" name="comment" />
-				<Input value={selectedRating ?? 0} readOnly name="rating" display="none" />
-				{error && (
-					<Text mt="4" color="red.500">
-						{error}
-					</Text>
-				)}
-				<StarsRating canInteract={true} rating={selectedRating} setSelectedRating={setSelectedRating} />
-				<StyledButton type="submit">Post</StyledButton>
-			</form>
-		</>
+		<chakra.form onSubmit={handleSubmit(onReviewSubmit)} id={review ? 'editReviewForm' : 'createReviewForm'}>
+			<FormControl isRequired={true} isDisabled={isSubmitting}>
+				<Textarea borderRadius="2xl" backgroundColor="white" placeholder="Add a review" {...register('comment')} />
+			</FormControl>
+			<FormControl isRequired={true} isDisabled={isSubmitting} isInvalid={Boolean(errors)}>
+				<Input value={selectedRating ?? 0} type="number" readOnly display="none" {...register('rating')} />
+				<FormErrorMessage color="red.500">{errors.rating?.message}</FormErrorMessage>
+			</FormControl>
+			<StarsRating canInteract={!isSubmitting} rating={selectedRating} setSelectedRating={setSelectedRating} />
+			{!review && (
+				<StyledButton type="submit" isLoading={isSubmitting} loadingText="Submitting">
+					Post
+				</StyledButton>
+			)}
+		</chakra.form>
 	);
 };

@@ -2,14 +2,16 @@
 
 import useSWR from 'swr';
 import { getManyTopRatedShows } from '../../../../fetchers/show';
+import { ErrorMessage } from '../../../shared/ErrorMessage/ErrorMessage';
 import { Loader } from '../../../shared/Loader/Loader';
 import { ShowsList } from '../ShowsList/ShowsList';
+import { swrKeys } from '../../../../fetchers/swrKeys';
 
 export function TopRatedShowsContainer() {
-	const { data, error, isLoading } = useSWR('/api/shows/top-rated', getManyTopRatedShows);
+	const { data, error, isLoading } = useSWR(swrKeys.topRated, getManyTopRatedShows);
 
 	if (error) {
-		return <p>Something went wrong, please retry.</p>;
+		return <ErrorMessage />;
 	}
 
 	if (isLoading || !data) {

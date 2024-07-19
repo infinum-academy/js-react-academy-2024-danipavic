@@ -5,14 +5,18 @@ interface IShowsResponse {
 	shows: Array<IShow>;
 }
 
-export function getManyShows() {
-	return fetcher<IShowsResponse>('/api/shows');
+interface IShowResponse {
+	show: IShow;
 }
 
-export function getOneShow(id: string) {
-	return fetcher<IShow>(`/api/shows/${id}`);
+export function getManyShows(url: string) {
+	return fetcher<IShowsResponse>(url);
 }
 
-export function getManyTopRatedShows() {
-	return fetcher<IShowsResponse>('/api/shows/top-rated');
+export function getOneShow(url: string) {
+	return fetcher<IShowResponse>(url);
+}
+
+export function getManyTopRatedShows(url: string) {
+	return fetcher<IShowsResponse>(url);
 }

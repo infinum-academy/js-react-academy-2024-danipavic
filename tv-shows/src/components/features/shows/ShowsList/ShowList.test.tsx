@@ -1,6 +1,13 @@
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { IShow } from '../../../../typings/Show.type';
+import { ShowCard } from '../../../shared/ShowCard/ShowCard';
 import { ShowsList } from './ShowsList';
+
+jest.mock('../../../shared/ShowCard/ShowCard', () => {
+	return {
+		ShowCard: jest.fn().mockReturnValue(null),
+	};
+});
 
 describe('ShowList', () => {
 	const mockShows: Array<IShow> = [
@@ -22,14 +29,11 @@ describe('ShowList', () => {
 		},
 	];
 
-	it('should render all shows', () => {
+	it('should call ShowCard with correct props', () => {
 		render(<ShowsList shows={mockShows} />);
 
-		const showTitles = screen.getAllByRole('heading', { level: 2 });
-
-		expect(showTitles.length).toBe(2);
-		showTitles.forEach((heading, index) => {
-			expect(heading.innerHTML).toBe(mockShows[index].title);
-		});
+		expect(ShowCard).toHaveBeenCalledTimes(2);
+		expect(ShowCard).toHaveBeenNthCalledWith(1, { ...mockShows[0] }, {});
+		expect(ShowCard).toHaveBeenNthCalledWith(2, { ...mockShows[1] }, {});
 	});
 });

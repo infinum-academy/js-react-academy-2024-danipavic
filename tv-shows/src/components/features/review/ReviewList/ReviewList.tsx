@@ -5,14 +5,13 @@ import { ReviewItem } from '../ReviewItem/ReviewItem';
 
 interface IReviewListProps {
 	reviews?: Array<IReview>;
-	onRemoveReview: (uuid: string) => void;
 }
 
-export const ReviewList = ({ reviews, onRemoveReview }: IReviewListProps) => {
+export const ReviewList = ({ reviews }: IReviewListProps) => {
 	return (
 		<>
 			{reviews?.map((review, index) => (
-				<ReviewItem key={index} review={review} onRemoveReview={onRemoveReview} />
+				<ReviewItem key={index} review={review} />
 			))}
 		</>
 	);

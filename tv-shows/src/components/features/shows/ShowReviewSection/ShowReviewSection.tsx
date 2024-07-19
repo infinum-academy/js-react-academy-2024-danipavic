@@ -2,23 +2,21 @@
 
 import { Heading } from '@chakra-ui/react';
 import { IReview } from '../../../../typings/Review.type';
-import { ReviewForm } from '../../review/ReviewForm/ReviewForm';
+import { CreateReviewContainer } from '../../review/CreateReviewContainer/CreateReviewContainer';
 import { ReviewList } from '../../review/ReviewList/ReviewList';
 
 interface IShowReviewSectionProps {
 	reviews?: Array<IReview>;
-	onAddReview: (review: IReview) => void;
-	onRemoveReview: (uuid: string) => void;
 }
 
-export const ShowReviewSection = ({ reviews, onAddReview, onRemoveReview }: IShowReviewSectionProps) => {
+export const ShowReviewSection = ({ reviews }: IShowReviewSectionProps) => {
 	return (
 		<>
 			<Heading color="white" size="lg" mb={4}>
 				Reviews
 			</Heading>
-			<ReviewForm onAddReview={onAddReview} />
-			<ReviewList reviews={reviews} onRemoveReview={onRemoveReview} />
+			<CreateReviewContainer />
+			<ReviewList reviews={reviews} />
 		</>
 	);
 };
