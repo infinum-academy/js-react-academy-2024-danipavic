@@ -7,12 +7,10 @@ export const ShowCard = (show: IShow) => {
 	return (
 		<Card as={NextLink} href={`/all-shows/${show.id}`} w="240px" h="340px" borderRadius="2xl" overflow="hidden">
 			<Image
-				src={show.image_url}
+				src={show.image_url ?? 'https://fakeimg.pl/1920x1080/fcfcfc/322659?text=Missing+show+cover'}
 				alt="Show image"
 				width="100%"
 				height="69%"
-				fallbackSrc="
-          https://fakeimg.pl/1920x1080/fcfcfc/322659?text=Missing+show+cover"
 			/>
 			<CardBody color="purple.700">
 				<VStack align="flex-start" height="100%">
