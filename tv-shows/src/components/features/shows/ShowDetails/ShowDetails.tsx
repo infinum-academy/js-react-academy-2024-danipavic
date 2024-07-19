@@ -11,13 +11,11 @@ export const ShowDetails = ({ show, reviews }: IShowProps) => {
 	return (
 		<Card borderRadius="2xl" h="340px" overflow="hidden" mb={4}>
 			<Image
-				src={show.image_url}
+				src={show.image_url ?? 'https://fakeimg.pl/1920x1080/fcfcfc/322659?text=Missing+show+cover'}
 				width="100%"
 				maxHeight="50%"
 				objectFit="cover"
 				alt="Show image"
-				fallbackSrc="
-          https://fakeimg.pl/1920x1080/fcfcfc/322659?text=Missing+show+cover"
 			/>
 			<CardBody color="purple.700">
 				<Heading size="md">{show.title}</Heading>

@@ -1,7 +1,9 @@
+import { IUser } from '../fetchers/auth';
+
 export interface IReview {
-  rating: number;
-  comment: string;
-  reviewerEmail: string;
-  reviewerAvatarURL: string;
-  uuid: string;
+	id: string;
+	comment: string;
+	rating: number;
+	show_id: number;
+	user: IUser;
 }

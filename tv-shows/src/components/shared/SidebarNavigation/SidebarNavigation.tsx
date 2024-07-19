@@ -8,22 +8,20 @@ import useSWR from 'swr';
 import { AUTH_LOCAL_STORAGE_KEY } from '../../../constants';
 import { getUser } from '../../../fetchers/auth';
 import { swrKeys } from '../../../fetchers/swrKeys';
-import { ILocalStorageAuth, loadFromLocalStorage } from '../../../utils/localstorage-helpers';
 import { Header } from '../Header/Header';
 
 export const SidebarNavigation = () => {
 	const pathname = usePathname();
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
-	const { mutate, data } = useSWR(swrKeys.user, getUser);
+	const { mutate, data } = useSWR(swrKeys.user, getUser, { refreshInterval: 5000 });
 
 	useEffect(() => {
-		setIsLoggedIn(Boolean(loadFromLocalStorage<ILocalStorageAuth>(AUTH_LOCAL_STORAGE_KEY)));
+		setIsLoggedIn(Boolean(data));
 	}, [data]);
 
 	const onLogout = () => {
-		mutate(null, { revalidate: false });
-		setIsLoggedIn(false);
 		localStorage.removeItem(AUTH_LOCAL_STORAGE_KEY);
+		mutate(undefined);
 	};
 
 	return (

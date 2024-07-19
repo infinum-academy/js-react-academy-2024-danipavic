@@ -2,25 +2,24 @@
 
 import { chakra, FormControl, FormErrorMessage, Input, Textarea } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
-import { set, useForm } from 'react-hook-form';
-import { AUTH_LOCAL_STORAGE_KEY } from '../../../../constants';
+import { useForm } from 'react-hook-form';
 import { IReview } from '../../../../typings/Review.type';
-import { ILocalStorageAuth, loadFromLocalStorage } from '../../../../utils/localstorage-helpers';
 import { StyledButton } from '../../../core/StyledButton/StyledButton';
 import { StarsRating } from '../../../shared/StarsRating/StarsRating';
 
-interface IReviewFormProps {
-	onAddReview: (review: IReview) => void;
-}
-
-interface IRatingFormInputs {
+export interface IRatingFormInputs {
 	comment: string;
 	rating: number;
 }
 
-export const ReviewForm = ({ onAddReview }: IReviewFormProps) => {
-	const [selectedRating, setSelectedRating] = useState<number>(0);
-	const userData = loadFromLocalStorage<ILocalStorageAuth>(AUTH_LOCAL_STORAGE_KEY);
+interface IReviewFormProps {
+	saveForm: (data: IRatingFormInputs) => void;
+	review?: IReview;
+}
+
+export const ReviewForm = ({ review, saveForm }: IReviewFormProps) => {
+	const [selectedRating, setSelectedRating] = useState<number>(review?.rating ?? 0);
+
 	const {
 		register,
 		handleSubmit,
@@ -29,7 +28,7 @@ export const ReviewForm = ({ onAddReview }: IReviewFormProps) => {
 		clearErrors,
 		resetField,
 		formState: { errors, isSubmitting },
-	} = useForm<IRatingFormInputs>();
+	} = useForm<IRatingFormInputs>({ values: { comment: review?.comment ?? '', rating: review?.rating ?? 0 } });
 
 	useEffect(() => {
 		setValue('rating', selectedRating);
@@ -45,37 +44,31 @@ export const ReviewForm = ({ onAddReview }: IReviewFormProps) => {
 			clearErrors('rating');
 		}
 
-		const newReview: IReview = {
-			comment,
-			rating,
-			uuid: window.crypto.randomUUID(),
-			reviewerAvatarURL: 'https://i.pravatar.cc/150?img=68',
-			reviewerEmail: userData?.Uid || '',
-		};
-
 		resetField('comment');
 		resetField('rating');
 
-		onAddReview(newReview);
+		saveForm(formData);
 
-		setSelectedRating(0);
+		if (!review) {
+			setSelectedRating(0);
+		}
 	};
 
 	return (
-		<>
-			<chakra.form onSubmit={handleSubmit(onReviewSubmit)}>
-				<FormControl isRequired={true} isDisabled={isSubmitting}>
-					<Textarea borderRadius="2xl" backgroundColor="white" placeholder="Add a review" {...register('comment')} />
-				</FormControl>
-				<FormControl isRequired={true} isDisabled={isSubmitting} isInvalid={Boolean(errors)}>
-					<Input value={selectedRating ?? 0} type="number" readOnly display="none" {...register('rating')} />
-					<FormErrorMessage color="red.500">{errors.rating?.message}</FormErrorMessage>
-				</FormControl>
-				<StarsRating canInteract={!isSubmitting} rating={selectedRating} setSelectedRating={setSelectedRating} />
+		<chakra.form onSubmit={handleSubmit(onReviewSubmit)} id={review ? 'editReviewForm' : 'createReviewForm'}>
+			<FormControl isRequired={true} isDisabled={isSubmitting}>
+				<Textarea borderRadius="2xl" backgroundColor="white" placeholder="Add a review" {...register('comment')} />
+			</FormControl>
+			<FormControl isRequired={true} isDisabled={isSubmitting} isInvalid={Boolean(errors)}>
+				<Input value={selectedRating ?? 0} type="number" readOnly display="none" {...register('rating')} />
+				<FormErrorMessage color="red.500">{errors.rating?.message}</FormErrorMessage>
+			</FormControl>
+			<StarsRating canInteract={!isSubmitting} rating={selectedRating} setSelectedRating={setSelectedRating} />
+			{!review && (
 				<StyledButton type="submit" isLoading={isSubmitting} loadingText="Submitting">
 					Post
 				</StyledButton>
-			</chakra.form>
-		</>
+			)}
+		</chakra.form>
 	);
 };

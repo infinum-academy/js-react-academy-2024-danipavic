@@ -3,9 +3,7 @@ import { ReviewForm } from './ReviewForm';
 
 describe('ReviewForm', () => {
 	it('should render all form elements', () => {
-		const mockOnAddReview = jest.fn();
-
-		render(<ReviewForm onAddReview={mockOnAddReview} />);
+		render(<ReviewForm />);
 
 		expect(screen.getByRole('textbox')).toBeInTheDocument();
 		expect(screen.getByTestId('stars-rating')).toBeInTheDocument();

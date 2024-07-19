@@ -35,7 +35,7 @@ export const RegisterForm = () => {
 		handleSubmit,
 		formState: { isSubmitting },
 	} = useForm<IRegisterFormInputs>();
-	const { trigger, isMutating } = useSWRMutation(swrKeys.register, registerUser(), {
+	const { trigger, isMutating } = useSWRMutation(swrKeys.register, registerUser, {
 		onSuccess: async (data) => {
 			await data.json();
 			setRegistered(true);

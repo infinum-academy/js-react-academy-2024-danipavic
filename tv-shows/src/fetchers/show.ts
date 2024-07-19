@@ -1,6 +1,5 @@
 import { fetcher } from '@/fetchers/fetcher';
 import { IShow } from '../typings/Show.type';
-import { swrKeys } from './swrKeys';
 
 interface IShowsResponse {
 	shows: Array<IShow>;
@@ -10,14 +9,14 @@ interface IShowResponse {
 	show: IShow;
 }
 
-export function getManyShows() {
-	return fetcher<IShowsResponse>(swrKeys.shows);
+export function getManyShows(url: string) {
+	return fetcher<IShowsResponse>(url);
 }
 
-export function getOneShow(id: string) {
-	return fetcher<IShowResponse>(swrKeys.show(id));
+export function getOneShow(url: string) {
+	return fetcher<IShowResponse>(url);
 }
 
-export function getManyTopRatedShows() {
-	return fetcher<IShowsResponse>(swrKeys.topRated);
+export function getManyTopRatedShows(url: string) {
+	return fetcher<IShowsResponse>(url);
 }
