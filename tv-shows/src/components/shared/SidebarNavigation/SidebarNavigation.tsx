@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, VStack } from '@chakra-ui/react';
+import { Button, StackProps, VStack } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -10,7 +10,7 @@ import { getUser } from '../../../fetchers/auth';
 import { swrKeys } from '../../../fetchers/swrKeys';
 import { Header } from '../Header/Header';
 
-export const SidebarNavigation = () => {
+export const SidebarNavigation = ({ ...rest }: StackProps) => {
 	const pathname = usePathname();
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 	const { mutate, data } = useSWR(swrKeys.user, getUser, { refreshInterval: 5000 });
@@ -26,9 +26,9 @@ export const SidebarNavigation = () => {
 
 	return (
 		isLoggedIn && (
-			<VStack maxH="100vh" as="aside" p="6" align="flex-start">
+			<VStack maxH="100vh" flexGrow="1" as="aside" p="6" align="flex-start" {...rest}>
 				<VStack align="flex-start" mb="auto">
-					<Header />
+					<Header display={{ base: 'none', lg: 'block' }} />
 					<Button
 						as={NextLink}
 						href={'/all-shows'}
