@@ -1,7 +1,9 @@
 import { extendTheme } from '@chakra-ui/react';
 import '@fontsource/lato';
+import { Heading } from './components/heading';
 import { colors } from './foundations/colors';
 import { fonts } from './foundations/fonts';
+import { Spinner } from './components/spinner';
 
 export default extendTheme({
 	fonts,
@@ -13,4 +15,8 @@ export default extendTheme({
 		},
 	},
 	colors,
+	components: {
+		Heading,
+		Spinner,
+	},
 });
