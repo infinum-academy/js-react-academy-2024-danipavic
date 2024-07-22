@@ -12,7 +12,7 @@ export const ShowCard = (show: IShow) => {
 				width="100%"
 				height="69%"
 			/>
-			<CardBody color="purple.700">
+			<CardBody color="purpleDark">
 				<VStack align="flex-start" height="100%">
 					<Heading size="md">{show.title}</Heading>
 					<Flex align="center">

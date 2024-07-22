@@ -24,7 +24,7 @@ export const EditReviewModal = ({ review }: IEditReviewModalProps) => {
 			<StyledButton onClick={onOpen}>Edit</StyledButton>
 			<Modal isCentered isOpen={isOpen} onClose={onClose}>
 				<ModalOverlay />
-				<ModalContent p="2" backgroundColor="purple.700">
+				<ModalContent p="2" backgroundColor="purpleDark">
 					<ModalHeader color="white">Edit review</ModalHeader>
 					<ModalCloseButton color="white" />
 					<ModalBody>

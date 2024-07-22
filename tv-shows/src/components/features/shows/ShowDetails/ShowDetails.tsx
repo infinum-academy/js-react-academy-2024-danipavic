@@ -17,7 +17,7 @@ export const ShowDetails = ({ show, reviews }: IShowProps) => {
 				objectFit="cover"
 				alt="Show image"
 			/>
-			<CardBody color="purple.700">
+			<CardBody color="purpleDark">
 				<Heading size="md">{show.title}</Heading>
 				<Text pt="2" fontSize="sm">
 					{show.description}

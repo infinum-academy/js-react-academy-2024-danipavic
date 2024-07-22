@@ -8,14 +8,14 @@ export const StyledButton = ({ children, variant = 'solid', ...rest }: ButtonPro
 		color: 'black',
 		border: '1px solid white',
 		_hover: {
-			bg: 'purple.700',
+			bg: 'purpleDark',
 			border: '1px solid white',
 			color: 'white',
 		},
 	};
 
 	const outlineVariant = {
-		bg: 'purple.700',
+		bg: 'purpleDark',
 		color: 'white',
 		border: '1px solid white',
 		_hover: {

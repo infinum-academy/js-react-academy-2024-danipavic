@@ -83,7 +83,7 @@ export const LoginForm = () => {
 						type="submit"
 						mb="2"
 						borderRadius="3xl"
-						color="purple.700"
+						color="purpleDark"
 						paddingY="6"
 						paddingX="8"
 					>

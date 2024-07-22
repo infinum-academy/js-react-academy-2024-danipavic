@@ -29,8 +29,8 @@ export function Toolbar({ ...rest }: BoxProps) {
 				</Flex>
 				<Drawer isOpen={isOpen} placement="left" onClose={onClose} finalFocusRef={btnRef}>
 					<DrawerOverlay />
-					<DrawerContent bgColor="purple.900">
-						<DrawerCloseButton color="white" border={'2px solid'} borderRadius="2xl" />
+					<DrawerContent bgColor="purpleDarkest">
+						<DrawerCloseButton color="white" border={'2px solid white'} borderRadius="2xl" />
 						<SidebarNavigation mt="12" />
 					</DrawerContent>
 				</Drawer>

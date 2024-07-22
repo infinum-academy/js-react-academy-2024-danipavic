@@ -1,16 +1,16 @@
 import { extendTheme } from '@chakra-ui/react';
 import '@fontsource/lato';
+import { colors } from './foundations/colors';
+import { fonts } from './foundations/fonts';
 
 export default extendTheme({
-	fonts: {
-		heading: `'Lato', sans-serif`,
-		body: `'Lato', sans-serif`,
-	},
+	fonts,
 	styles: {
 		global: {
 			body: {
-				bg: 'purple.900',
+				bg: 'purpleDarkest',
 			},
 		},
 	},
+	colors,
 });
