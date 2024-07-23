@@ -84,33 +84,20 @@ export const RegisterForm = () => {
 					>
 						<FormControl isRequired={true} isDisabled={isSubmitting}>
 							<FormLabel>Email</FormLabel>
-							<IconInput<IRegisterFormInputs>
-								icon={MdAccountCircle}
-								type="email"
-								formControlName="email"
-								register={register}
-								placeholder="Email"
-							/>
+							<IconInput type="email" placeholder="Email" icon={MdAccountCircle} {...register('email')} />
 						</FormControl>
 						<FormControl isRequired={true} isDisabled={isSubmitting}>
 							<FormLabel>Password</FormLabel>
-							<IconInput<IRegisterFormInputs>
-								icon={MdLock}
-								type="password"
-								formControlName="password"
-								register={register}
-								placeholder="Password"
-							/>
+							<IconInput type="password" placeholder="Password" {...register('password')} icon={MdLock} />
 							<FormHelperText color="white">At least 8 characters</FormHelperText>
 						</FormControl>
 						<FormControl isRequired={true} isInvalid={!matchingPasswords} isDisabled={isSubmitting} mb="4">
 							<FormLabel>Confirm password</FormLabel>
-							<IconInput<IRegisterFormInputs>
-								icon={MdLock}
+							<IconInput
 								type="password"
-								formControlName="password_confirmation"
-								register={register}
 								placeholder="Confirm password"
+								icon={MdLock}
+								{...register('password_confirmation')}
 							/>
 							<FormErrorMessage color="white">Password must match</FormErrorMessage>
 						</FormControl>

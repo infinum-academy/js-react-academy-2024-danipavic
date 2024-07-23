@@ -58,23 +58,11 @@ export const LoginForm = () => {
 				<chakra.form display="flex" flexDirection="column" alignItems="center" gap={4} onSubmit={handleSubmit(onLogin)}>
 					<FormControl isRequired={true} isDisabled={isSubmitting}>
 						<FormLabel>Email</FormLabel>
-						<IconInput<ILoginFormInputs>
-							icon={MdAccountCircle}
-							type="email"
-							formControlName="email"
-							register={register}
-							placeholder="Email"
-						/>
+						<IconInput placeholder="Email" type="email" icon={MdAccountCircle} {...register('email')} />
 					</FormControl>
 					<FormControl isRequired={true} isDisabled={isSubmitting}>
 						<FormLabel>Password</FormLabel>
-						<IconInput<ILoginFormInputs>
-							icon={MdLock}
-							type="password"
-							formControlName="password"
-							register={register}
-							placeholder="Password"
-						/>
+						<IconInput type="password" placeholder="Password" icon={MdLock} {...register('password')} />
 					</FormControl>
 					<Button
 						variant="primary"

@@ -69,7 +69,7 @@ export const ReviewForm = ({ review, saveForm }: IReviewFormProps) => {
 			</FormControl>
 			<StarsRating canInteract={!isSubmitting} rating={selectedRating} setSelectedRating={setSelectedRating} />
 			{!review && (
-				<Button type="submit" isLoading={isSubmitting} loadingText="Submitting">
+				<Button type="submit" variant="primary" isLoading={isSubmitting} loadingText="Submitting">
 					Post
 				</Button>
 			)}
