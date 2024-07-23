@@ -58,7 +58,13 @@ export const RegisterForm = () => {
 
 	if (registered) {
 		return (
-			<Alert status="success" flexDirection="column" gap="6" borderRadius="2xl" backgroundColor="purpleBase">
+			<Alert
+				status="success"
+				flexDirection="column"
+				gap="6"
+				borderRadius="containerRadius"
+				backgroundColor="purpleBase"
+			>
 				<Text color="white">Registration successful, proceed to the login.</Text>
 				<Button href="/auth/login" color="purpleDarkest" as={NextLink}>
 					Login
@@ -111,7 +117,7 @@ export const RegisterForm = () => {
 						<Button
 							type="submit"
 							mb="2"
-							borderRadius="3xl"
+							borderRadius="buttonRadius"
 							isLoading={isSubmitting}
 							disabled={isSubmitting}
 							loadingText="Registering"

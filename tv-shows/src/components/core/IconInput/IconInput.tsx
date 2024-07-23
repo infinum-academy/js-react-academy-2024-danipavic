@@ -34,19 +34,23 @@ export function IconInput<T extends FieldValues>({
 
 	return (
 		<InputGroup size="lg">
-			<InputLeftAddon backgroundColor="transparent" borderEndStartRadius="3xl" borderStartStartRadius="3xl">
+			<InputLeftAddon
+				backgroundColor="transparent"
+				borderEndStartRadius="inputRadius"
+				borderStartStartRadius="inputRadius"
+			>
 				<Icon as={icon} />
 			</InputLeftAddon>
 			<Input
 				{...register(formControlName)}
 				required
 				type={inputType}
-				borderRadius="3xl"
+				borderRadius="inputRadius"
 				borderLeft="none"
 				placeholder={placeholder}
 				backgroundColor="transparent"
-				borderEndStartRadius="3xl"
-				borderStartStartRadius="3xl"
+				borderEndStartRadius="inputRadius"
+				borderStartStartRadius="inputRadius"
 			/>
 			{type === 'password' && (
 				<InputRightElement onClick={handleTogglePassword}>

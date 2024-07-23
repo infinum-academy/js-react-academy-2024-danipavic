@@ -27,7 +27,7 @@ export const StyledButton = ({ children, variant = 'solid', ...rest }: ButtonPro
 
 	return (
 		<Button
-			borderRadius="3xl"
+			borderRadius="buttonRadius"
 			mb="4"
 			minWidth="98px"
 			sx={variant === 'solid' ? solidVariant : outlineVariant}

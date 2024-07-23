@@ -30,7 +30,7 @@ export const ReviewItem = ({ review }: IReviewItemProps) => {
 	}, [setUserID, data]);
 
 	return (
-		<Card bgColor="purpleDark" color="white" borderRadius="2xl" overflow="hidden" mb={4}>
+		<Card bgColor="purpleDark" color="white" borderRadius="containerRadius" overflow="hidden" mb={4}>
 			<CardHeader>
 				<Flex gap={2} align="center">
 					<Avatar src={review.user.image_url} />

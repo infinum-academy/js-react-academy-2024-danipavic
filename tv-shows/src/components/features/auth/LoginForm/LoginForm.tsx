@@ -82,7 +82,7 @@ export const LoginForm = () => {
 						loadingText="Logging in"
 						type="submit"
 						mb="2"
-						borderRadius="3xl"
+						borderRadius="buttonRadius"
 						color="purpleDark"
 						paddingY="6"
 						paddingX="8"
@@ -98,7 +98,7 @@ export const LoginForm = () => {
 				</chakra.form>
 			</AuthFormCard>
 			{error && (
-				<Alert status="error" borderRadius="2xl">
+				<Alert status="error" borderRadius="containerRadius">
 					Something went wrong, please try again.
 				</Alert>
 			)}

@@ -4,9 +4,9 @@ import { Heading } from './components/heading';
 import { colors } from './foundations/colors';
 import { fonts } from './foundations/fonts';
 import { Spinner } from './components/spinner';
+import { radii } from './foundations/radii';
 
 export default extendTheme({
-	fonts,
 	styles: {
 		global: {
 			body: {
@@ -14,7 +14,9 @@ export default extendTheme({
 			},
 		},
 	},
+	fonts,
 	colors,
+	radii,
 	components: {
 		Heading,
 		Spinner,

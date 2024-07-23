@@ -30,7 +30,7 @@ export function Toolbar({ ...rest }: BoxProps) {
 				<Drawer isOpen={isOpen} placement="left" onClose={onClose} finalFocusRef={btnRef}>
 					<DrawerOverlay />
 					<DrawerContent bgColor="purpleDarkest">
-						<DrawerCloseButton color="white" border={'2px solid white'} borderRadius="2xl" />
+						<DrawerCloseButton color="white" border={'2px solid white'} borderRadius="buttonRadius" />
 						<SidebarNavigation mt="12" />
 					</DrawerContent>
 				</Drawer>

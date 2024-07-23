@@ -57,7 +57,12 @@ export const ReviewForm = ({ review, saveForm }: IReviewFormProps) => {
 	return (
 		<chakra.form onSubmit={handleSubmit(onReviewSubmit)} id={review ? 'editReviewForm' : 'createReviewForm'}>
 			<FormControl isRequired={true} isDisabled={isSubmitting}>
-				<Textarea borderRadius="2xl" backgroundColor="white" placeholder="Add a review" {...register('comment')} />
+				<Textarea
+					borderRadius="containerRadius"
+					backgroundColor="white"
+					placeholder="Add a review"
+					{...register('comment')}
+				/>
 			</FormControl>
 			<FormControl isRequired={true} isDisabled={isSubmitting} isInvalid={Boolean(errors)}>
 				<Input value={selectedRating ?? 0} type="number" readOnly display="none" {...register('rating')} />
