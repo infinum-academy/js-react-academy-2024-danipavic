@@ -30,34 +30,32 @@ export const SidebarNavigation = ({ ...rest }: StackProps) => {
 				<VStack align="flex-start" mb="auto">
 					<Header display={{ base: 'none', lg: 'block' }} />
 					<Button
+						variant="link"
 						as={NextLink}
 						href={'/all-shows'}
 						textDecoration={pathname === '/all-shows' ? 'underline' : ''}
 						fontSize="2xl"
 						mb="4"
 						fontWeight="light"
-						color="white"
-						variant="link"
 					>
 						All shows
 					</Button>
 					<Button
+						variant="link"
 						as={NextLink}
 						href={'/top-rated'}
 						textDecoration={pathname === '/top-rated' ? 'underline' : ''}
 						fontSize="2xl"
 						mb="4"
 						fontWeight="light"
-						color="white"
-						variant="link"
 					>
 						Top rated
 					</Button>
-					<Button as={NextLink} href={'/'} fontSize="2xl" mb="4" fontWeight="light" color="white" variant="link">
+					<Button variant="link" as={NextLink} href={'/'} fontSize="2xl" mb="4" fontWeight="light">
 						My profile
 					</Button>
 				</VStack>
-				<Button variant="link" fontWeight="light" color="white" onClick={onLogout}>
+				<Button variant="link" fontWeight="light" onClick={onLogout}>
 					Logout
 				</Button>
 			</VStack>

@@ -1,4 +1,5 @@
 import {
+	Button,
 	Modal,
 	ModalBody,
 	ModalCloseButton,
@@ -9,7 +10,6 @@ import {
 	useDisclosure,
 } from '@chakra-ui/react';
 import { IReview } from '../../../../typings/Review.type';
-import { StyledButton } from '../../../core/StyledButton/StyledButton';
 import { EditReviewContainer } from '../EditReviewContainer/EditReviewContainer';
 
 interface IEditReviewModalProps {
@@ -21,7 +21,9 @@ export const EditReviewModal = ({ review }: IEditReviewModalProps) => {
 
 	return (
 		<>
-			<StyledButton onClick={onOpen}>Edit</StyledButton>
+			<Button variant="primary" onClick={onOpen}>
+				Edit
+			</Button>
 			<Modal isCentered isOpen={isOpen} onClose={onClose}>
 				<ModalOverlay />
 				<ModalContent p="2" backgroundColor="purpleDark">
@@ -31,12 +33,12 @@ export const EditReviewModal = ({ review }: IEditReviewModalProps) => {
 						<EditReviewContainer review={review} onSuccess={onClose} />
 					</ModalBody>
 					<ModalFooter gap="4">
-						<StyledButton type="submit" form="editReviewForm" variant="outline" loadingText="Editing">
+						<Button type="submit" form="editReviewForm" variant="secondary" loadingText="Editing">
 							Submit
-						</StyledButton>
-						<StyledButton type="button" loadingText="Cancelling" onClick={onClose}>
+						</Button>
+						<Button type="button" variant="primary" loadingText="Cancelling" onClick={onClose}>
 							Cancel
-						</StyledButton>
+						</Button>
 					</ModalFooter>
 				</ModalContent>
 			</Modal>

@@ -1,5 +1,6 @@
 import { extendTheme } from '@chakra-ui/react';
 import '@fontsource/lato';
+import { Button } from './components/button';
 import { Card } from './components/card';
 import { Heading } from './components/heading';
 import { Spinner } from './components/spinner';
@@ -22,5 +23,6 @@ export default extendTheme({
 		Heading,
 		Spinner,
 		Card,
+		Button,
 	},
 });

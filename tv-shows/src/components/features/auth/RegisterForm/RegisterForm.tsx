@@ -66,7 +66,7 @@ export const RegisterForm = () => {
 				backgroundColor="purpleBase"
 			>
 				<Text color="white">Registration successful, proceed to the login.</Text>
-				<Button href="/auth/login" color="purpleDarkest" as={NextLink}>
+				<Button href="/auth/login" variant="primary" as={NextLink}>
 					Login
 				</Button>
 			</Alert>
@@ -116,12 +116,11 @@ export const RegisterForm = () => {
 						</FormControl>
 						<Button
 							type="submit"
+							variant="primary"
 							mb="2"
-							borderRadius="buttonRadius"
 							isLoading={isSubmitting}
 							disabled={isSubmitting}
 							loadingText="Registering"
-							color="purpleDark"
 							paddingY="6"
 							paddingX="8"
 						>

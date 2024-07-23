@@ -1,13 +1,12 @@
 'use client';
 
-import { Avatar, Card, CardBody, CardFooter, CardHeader, Flex, Text } from '@chakra-ui/react';
+import { Avatar, Button, Card, CardBody, CardFooter, CardHeader, Flex, Text } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import useSWR, { mutate } from 'swr';
 import useSWRMutation from 'swr/mutation';
 import { deleteReview } from '../../../../fetchers/reviews';
 import { swrKeys } from '../../../../fetchers/swrKeys';
 import { IReview } from '../../../../typings/Review.type';
-import { StyledButton } from '../../../core/StyledButton/StyledButton';
 import { StarsRating } from '../../../shared/StarsRating/StarsRating';
 import { EditReviewModal } from '../EditReviewModal/EditReviewModal';
 
@@ -49,9 +48,9 @@ export const ReviewItem = ({ review }: IReviewItemProps) => {
 				{userID === review.user.email && (
 					<>
 						<EditReviewModal review={review} />
-						<StyledButton onClick={() => trigger()} data-testid="remove-review-button">
+						<Button variant="primary" onClick={() => trigger()} data-testid="remove-review-button">
 							Remove
-						</StyledButton>
+						</Button>
 					</>
 				)}
 			</CardFooter>

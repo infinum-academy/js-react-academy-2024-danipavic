@@ -77,13 +77,12 @@ export const LoginForm = () => {
 						/>
 					</FormControl>
 					<Button
+						variant="primary"
 						isLoading={isSubmitting}
 						disabled={isSubmitting}
 						loadingText="Logging in"
 						type="submit"
 						mb="2"
-						borderRadius="buttonRadius"
-						color="purpleDark"
 						paddingY="6"
 						paddingX="8"
 					>
