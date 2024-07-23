@@ -14,7 +14,9 @@ export const ShowCard = (show: IShow) => {
 			/>
 			<CardBody color="purpleDark">
 				<VStack align="flex-start" height="100%">
-					<Heading size="md">{show.title}</Heading>
+					<Heading variant="secondary" size="md">
+						{show.title}
+					</Heading>
 					<Flex align="center">
 						<Icon as={MdOutlineStarPurple500} />
 						<Text fontSize="sm">{show.average_rating ?? 0} / 5</Text>

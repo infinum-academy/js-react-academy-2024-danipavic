@@ -4,4 +4,9 @@ export const Heading = defineStyleConfig({
 	baseStyle: {
 		color: 'white',
 	},
+	variants: {
+		secondary: {
+			color: 'purpleDark',
+		},
+	},
 });
