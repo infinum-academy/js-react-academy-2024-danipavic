@@ -9,7 +9,7 @@ interface IShowPickerContext {
 	setActiveStep: (newActiveStep: number) => void;
 	selectedShows: Array<IShow>;
 	setSelectedShows: (newSelectedShows: Array<IShow>) => void;
-	isLastStep: boolean;
+	isResultsStep: boolean;
 	availableShows?: Array<IShow>;
 }
 export const ShowPickerContext = createContext<IShowPickerContext>({} as IShowPickerContext);
@@ -28,7 +28,7 @@ export const ShowPickerContextProvider = ({
 			value={{
 				activeStep,
 				setActiveStep,
-				isLastStep: Boolean(data?.shows && activeStep >= data.shows.length / 4),
+				isResultsStep: activeStep >= Math.ceil((data?.shows.length || 0) / 4),
 				availableShows: data?.shows,
 				selectedShows,
 				setSelectedShows,

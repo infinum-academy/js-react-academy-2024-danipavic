@@ -1,6 +1,6 @@
 'use client';
 import { Button, Flex } from '@chakra-ui/react';
-import { useContext } from 'react';
+import { act, useContext } from 'react';
 import { ShowPickerContext } from './ShowPickerContextProvider';
 
 interface IShowPickerActionsProps {
@@ -8,7 +8,7 @@ interface IShowPickerActionsProps {
 }
 
 export const ShowPickerActions = ({ onClose }: IShowPickerActionsProps) => {
-	const { activeStep, setActiveStep, setSelectedShows, isLastStep } = useContext(ShowPickerContext);
+	const { activeStep, setActiveStep, setSelectedShows, availableShows, isResultsStep } = useContext(ShowPickerContext);
 
 	const closeAndResetSteps = () => {
 		setSelectedShows([]);
@@ -18,7 +18,7 @@ export const ShowPickerActions = ({ onClose }: IShowPickerActionsProps) => {
 
 	return (
 		<Flex justify="space-between" align="center">
-			{isLastStep ? (
+			{isResultsStep ? (
 				<Button variant="primary" onClick={closeAndResetSteps}>
 					Close
 				</Button>
@@ -30,7 +30,7 @@ export const ShowPickerActions = ({ onClose }: IShowPickerActionsProps) => {
 						</Button>
 					)}
 					<Button variant="secondary" onClick={() => setActiveStep(activeStep + 1)}>
-						Next
+						{availableShows && activeStep === Math.ceil(availableShows.length / 4) - 1 ? 'Results' : 'Next'}
 					</Button>
 				</Flex>
 			)}
