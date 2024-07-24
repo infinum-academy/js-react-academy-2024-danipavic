@@ -5,11 +5,15 @@ import { useContext } from 'react';
 import { ShowPickerContext } from './ShowPickerContextProvider';
 
 export const ShowPickerProgress = () => {
-	const { activeStep, availableShows } = useContext(ShowPickerContext);
+	const { activeStep, availableShows, isResultsStep } = useContext(ShowPickerContext);
 
 	if (!availableShows) {
 		return null;
 	}
 
-	return <Progress value={Math.min((activeStep / (Math.ceil(availableShows.length / 4) - 1)) * 100, 100)} />;
+	return (
+		!isResultsStep && (
+			<Progress value={Math.min((activeStep / (Math.ceil(availableShows.length / 4) - 1)) * 100, 100)} />
+		)
+	);
 };
