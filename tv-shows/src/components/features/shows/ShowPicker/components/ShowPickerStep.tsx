@@ -1,3 +1,3 @@
 export const ShowPickerStep = () => {
-	return <></>;
+	return <>Step</>;
 };

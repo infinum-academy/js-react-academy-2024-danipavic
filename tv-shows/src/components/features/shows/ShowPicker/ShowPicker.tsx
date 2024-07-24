@@ -12,6 +12,7 @@ import {
 	useDisclosure,
 } from '@chakra-ui/react';
 import { ShowPickerActions } from './components/ShowPickerActions';
+import { ShowPickerContextProvider } from './components/ShowPickerContextProvider';
 import { ShowPickerProgress } from './components/ShowPickerProgress';
 import { ShowPickerStepper } from './components/ShowPickerStepper';
 
@@ -19,7 +20,7 @@ export const ShowPicker = () => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
 
 	return (
-		<>
+		<ShowPickerContextProvider>
 			<Button variant="link" fontWeight="light" fontSize="2xl" onClick={onOpen}>
 				Show Picker
 			</Button>
@@ -40,6 +41,6 @@ export const ShowPicker = () => {
 					</ModalFooter>
 				</ModalContent>
 			</Modal>
-		</>
+		</ShowPickerContextProvider>
 	);
 };
