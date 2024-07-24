@@ -1,11 +1,15 @@
-import { Card, CardBody, Flex, Heading, Icon, Image, Text, VStack } from '@chakra-ui/react';
+import { Card, CardBody, CardProps, Flex, Heading, Icon, Image, Text, VStack } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import { MdOutlineStarPurple500 } from 'react-icons/md';
 import { IShow } from '../../../typings/Show.type';
 
-export const ShowCard = (show: IShow) => {
+interface IShowCardProps extends CardProps {
+	show: IShow;
+}
+
+export const ShowCard = ({ show, ...rest }: IShowCardProps) => {
 	return (
-		<Card as={NextLink} href={`/all-shows/${show.id}`} w="240px" h="340px">
+		<Card as={NextLink} href={`/all-shows/${show.id}`} w="240px" h="340px" {...rest}>
 			<Image
 				src={show.image_url ?? 'https://fakeimg.pl/1920x1080/fcfcfc/322659?text=Missing+show+cover'}
 				alt="Show image"
