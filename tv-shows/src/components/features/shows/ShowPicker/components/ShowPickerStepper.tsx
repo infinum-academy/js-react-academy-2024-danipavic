@@ -7,13 +7,13 @@ import { ShowPickerResultStep } from './ShowPickerResultStep';
 import { ShowPickerStep } from './ShowPickerStep';
 
 export const ShowPickerStepper = () => {
-	const { activeStep, availableShows } = useContext(ShowPickerContext);
+	const { availableShows, isLastStep } = useContext(ShowPickerContext);
 
 	if (!availableShows) {
 		return <ErrorMessage />;
 	}
 
 	if (availableShows) {
-		return activeStep < availableShows.length ? <ShowPickerStep /> : <ShowPickerResultStep />;
+		return isLastStep ? <ShowPickerResultStep /> : <ShowPickerStep />;
 	}
 };

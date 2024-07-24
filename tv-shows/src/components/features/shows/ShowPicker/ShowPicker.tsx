@@ -36,7 +36,7 @@ export const ShowPicker = () => {
 					<ModalFooter>
 						<Flex direction="column" width="100%" gap={6}>
 							<ShowPickerProgress />
-							<ShowPickerActions />
+							<ShowPickerActions onClose={onClose} />
 						</Flex>
 					</ModalFooter>
 				</ModalContent>
