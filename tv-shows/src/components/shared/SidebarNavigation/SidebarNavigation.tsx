@@ -8,6 +8,7 @@ import useSWR from 'swr';
 import { AUTH_LOCAL_STORAGE_KEY } from '../../../constants';
 import { getUser } from '../../../fetchers/auth';
 import { swrKeys } from '../../../fetchers/swrKeys';
+import { ShowPicker } from '../../features/shows/ShowPicker/ShowPicker';
 import { Header } from '../Header/Header';
 
 export const SidebarNavigation = ({ ...rest }: StackProps) => {
@@ -35,7 +36,6 @@ export const SidebarNavigation = ({ ...rest }: StackProps) => {
 						href={'/all-shows'}
 						textDecoration={pathname === '/all-shows' ? 'underline' : ''}
 						fontSize="2xl"
-						mb="4"
 						fontWeight="light"
 					>
 						All shows
@@ -46,12 +46,12 @@ export const SidebarNavigation = ({ ...rest }: StackProps) => {
 						href={'/top-rated'}
 						textDecoration={pathname === '/top-rated' ? 'underline' : ''}
 						fontSize="2xl"
-						mb="4"
 						fontWeight="light"
 					>
 						Top rated
 					</Button>
-					<Button variant="link" as={NextLink} href={'/'} fontSize="2xl" mb="4" fontWeight="light">
+					<ShowPicker />
+					<Button variant="link" as={NextLink} href={'/'} fontSize="2xl" fontWeight="light">
 						My profile
 					</Button>
 				</VStack>
