@@ -13,6 +13,7 @@ export const Button = defineStyleConfig({
 		primary: {
 			backgroundColor: 'white',
 			color: 'black',
+			minWidth: '98px',
 			_hover: {
 				backgroundColor: 'purpleDark',
 				color: 'white',
@@ -21,6 +22,7 @@ export const Button = defineStyleConfig({
 		secondary: {
 			backgroundColor: 'purpleDark',
 			color: 'white',
+			minWidth: '98px',
 			_hover: {
 				backgroundColor: 'white',
 				border: '1px solid white',
@@ -31,6 +33,7 @@ export const Button = defineStyleConfig({
 			backgroundColor: 'transparent',
 			color: 'white',
 			border: 'none',
+			minWidth: '98px',
 			_hover: {
 				backgroundColor: 'transparent',
 				border: 'none',
