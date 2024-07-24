@@ -2,6 +2,7 @@
 import {
 	Button,
 	Flex,
+	Heading,
 	Modal,
 	ModalBody,
 	ModalContent,
@@ -24,13 +25,15 @@ export const ShowPicker = () => {
 			</Button>
 			<Modal isOpen={isOpen} onClose={onClose}>
 				<ModalOverlay />
-				<ModalContent>
-					<ModalHeader>Planner</ModalHeader>
+				<ModalContent bgColor="purpleDarkest">
+					<ModalHeader>
+						<Heading>Show Picker</Heading>
+					</ModalHeader>
 					<ModalBody>
 						<ShowPickerStepper />
 					</ModalBody>
 					<ModalFooter>
-						<Flex direction="column" width="100%" gap={3}>
+						<Flex direction="column" width="100%" gap={6}>
 							<ShowPickerProgress />
 							<ShowPickerActions />
 						</Flex>

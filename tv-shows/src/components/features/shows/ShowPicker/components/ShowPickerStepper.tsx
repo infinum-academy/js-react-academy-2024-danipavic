@@ -1,5 +1,7 @@
 'use client';
 
+import { ShowPickerResultStep } from './ShowPickerResultStep';
+
 export const ShowPickerStepper = () => {
-	return true ? <></> : <></>;
+	return true ? <ShowPickerStepper /> : <ShowPickerResultStep />;
 };
