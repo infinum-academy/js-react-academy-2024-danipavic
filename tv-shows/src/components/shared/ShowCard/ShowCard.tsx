@@ -20,6 +20,7 @@ export const ShowCard = ({ show, isLink, ...rest }: IShowCardProps) => {
 			<Image
 				src={show.image_url ?? 'https://fakeimg.pl/1920x1080/fcfcfc/322659?text=Missing+show+cover'}
 				alt="Show image"
+				objectFit="cover"
 				width="100%"
 				height="69%"
 			/>
