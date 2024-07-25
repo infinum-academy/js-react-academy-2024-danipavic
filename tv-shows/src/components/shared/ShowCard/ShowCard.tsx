@@ -5,11 +5,18 @@ import { IShow } from '../../../typings/Show.type';
 
 interface IShowCardProps extends CardProps {
 	show: IShow;
+	isLink?: boolean;
 }
 
-export const ShowCard = ({ show, ...rest }: IShowCardProps) => {
+export const ShowCard = ({ show, isLink, ...rest }: IShowCardProps) => {
 	return (
-		<Card as={NextLink} href={`/all-shows/${show.id}`} w="240px" h="340px" {...rest}>
+		<Card
+			as={isLink ? NextLink : undefined}
+			href={isLink ? `/all-shows/${show.id}` : undefined}
+			w="240px"
+			h="340px"
+			{...rest}
+		>
 			<Image
 				src={show.image_url ?? 'https://fakeimg.pl/1920x1080/fcfcfc/322659?text=Missing+show+cover'}
 				alt="Show image"

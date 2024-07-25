@@ -11,7 +11,7 @@ export const ShowsList = ({ shows }: IShowCardProps) => {
 		<Wrap justify="center" spacing="6">
 			{shows.map((show) => (
 				<WrapItem key={show.id}>
-					<ShowCard show={show} />
+					<ShowCard show={show} isLink />
 				</WrapItem>
 			))}
 		</Wrap>
