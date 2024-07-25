@@ -8,7 +8,7 @@ import { ShowPickerContext } from './ShowPickerContextProvider';
 export const ShowPickerResultStep = () => {
 	const { selectedShows } = useContext(ShowPickerContext);
 
-	return (
+	return selectedShows.length ? (
 		<>
 			<Text color="white" mb="4">
 				Here are your chosen TV Shows:
@@ -19,5 +19,7 @@ export const ShowPickerResultStep = () => {
 				))}
 			</Flex>
 		</>
+	) : (
+		<Text color="white">Looks like you haven't selected any show. Show picker is sad, please start over.</Text>
 	);
 };

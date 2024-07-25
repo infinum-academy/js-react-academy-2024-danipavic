@@ -5,6 +5,7 @@ import {
 	Heading,
 	Modal,
 	ModalBody,
+	ModalCloseButton,
 	ModalContent,
 	ModalFooter,
 	ModalHeader,
@@ -30,6 +31,7 @@ export const ShowPicker = () => {
 					<ModalHeader>
 						<Heading>Show Picker</Heading>
 					</ModalHeader>
+					<ModalCloseButton color="white" />
 					<ModalBody>
 						<ShowPickerStepper />
 					</ModalBody>
