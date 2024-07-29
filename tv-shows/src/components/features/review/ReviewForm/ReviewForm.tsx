@@ -65,7 +65,7 @@ export const ReviewForm = ({ review, saveForm }: IReviewFormProps) => {
 			</FormControl>
 			<FormControl isRequired={true} isDisabled={isSubmitting} isInvalid={Boolean(errors)}>
 				<Input value={selectedRating ?? 0} type="number" readOnly display="none" {...register('rating')} />
-				<FormErrorMessage color="redBase">{errors.rating?.message}</FormErrorMessage>
+				<FormErrorMessage color="pinkBase">{errors.rating?.message}</FormErrorMessage>
 			</FormControl>
 			<StarsRating canInteract={!isSubmitting} rating={selectedRating} setSelectedRating={setSelectedRating} />
 			{!review && (

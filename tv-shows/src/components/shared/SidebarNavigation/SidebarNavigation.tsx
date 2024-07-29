@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, StackProps, VStack } from '@chakra-ui/react';
+import { Button, Show, StackProps, VStack } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -28,7 +28,9 @@ export const SidebarNavigation = ({ ...rest }: StackProps) => {
 		isLoggedIn && (
 			<VStack maxH="100vh" flexGrow="1" as="aside" p="6" align="flex-start" {...rest}>
 				<VStack align="flex-start" mb="auto">
-					<Header display={{ base: 'none', lg: 'block' }} />
+					<Show above="lg">
+						<Header />
+					</Show>
 					<Button
 						variant="link"
 						as={NextLink}
