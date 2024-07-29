@@ -9,11 +9,11 @@ interface IShowProps {
 
 export const ShowDetails = ({ show, reviews }: IShowProps) => {
 	return (
-		<Card h="340px" mb={4}>
+		<Card minHeight="340px" mb={4}>
 			<Image
 				src={show.image_url ?? 'https://fakeimg.pl/1920x1080/fcfcfc/322659?text=Missing+show+cover'}
 				width="100%"
-				maxHeight="50%"
+				maxHeight="248px"
 				objectFit="cover"
 				alt="Show image"
 			/>

@@ -31,9 +31,9 @@ export const ReviewItem = ({ review }: IReviewItemProps) => {
 	return (
 		<Card bgColor="purpleDark" color="white" mb={4}>
 			<CardHeader>
-				<Flex gap={2} align="center">
-					<Avatar src={review.user.image_url} />
-					<Text data-testid="review-email" fontSize="sm">
+				<Flex gap={4} flexDirection={{ base: 'column', md: 'row' }} align={{ base: 'flex-start', md: 'center' }}>
+					<Avatar size={{ base: 'xs', md: 'md' }} src={review.user.image_url} />
+					<Text wordBreak="break-word" data-testid="review-email" fontSize="sm">
 						{review.user.email}
 					</Text>
 				</Flex>
