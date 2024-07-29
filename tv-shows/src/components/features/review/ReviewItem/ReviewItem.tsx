@@ -44,7 +44,12 @@ export const ReviewItem = ({ review }: IReviewItemProps) => {
 				</Text>
 				<StarsRating rating={review.rating} canInteract={false} />
 			</CardBody>
-			<CardFooter py="0" gap="4">
+			<CardFooter
+				py="0"
+				gap={{ base: 2, lg: 4 }}
+				px={{ base: 0, sm: 4 }}
+				justify={{ base: 'center', sm: 'flex-start' }}
+			>
 				{userID === review.user.email && (
 					<>
 						<EditReviewModal review={review} />
