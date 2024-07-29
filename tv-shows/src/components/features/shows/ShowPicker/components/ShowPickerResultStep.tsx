@@ -1,8 +1,9 @@
 'use client';
 
-import { Flex, Text } from '@chakra-ui/react';
+import { Flex, Show, Text } from '@chakra-ui/react';
 import { useContext } from 'react';
 import { ShowCard } from '../../../../shared/ShowCard/ShowCard';
+import { ShowMobileCard } from '../../../../shared/ShowMobileCard/ShowMobileCard';
 import { ShowPickerContext } from './ShowPickerContextProvider';
 
 export const ShowPickerResultStep = () => {
@@ -13,9 +14,16 @@ export const ShowPickerResultStep = () => {
 			<Text color="white" mb="4">
 				Here are your chosen TV Shows:
 			</Text>
-			<Flex wrap="wrap" flexDirection={{ base: 'column', md: 'row' }} align="center" justify="space-between" gap="8">
+			<Flex wrap="wrap" flexDirection={{ base: 'column', md: 'row' }} align="center" justify="space-between" gap="4">
 				{selectedShows.map((selectedShow) => (
-					<ShowCard key={selectedShow.id} show={selectedShow} />
+					<>
+						<Show above="lg">
+							<ShowCard key={selectedShow.id} show={selectedShow} />
+						</Show>
+						<Show below="lg">
+							<ShowMobileCard key={selectedShow.id} show={selectedShow} />
+						</Show>
+					</>
 				))}
 			</Flex>
 		</>

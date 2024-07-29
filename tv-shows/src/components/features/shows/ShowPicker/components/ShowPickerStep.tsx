@@ -1,9 +1,10 @@
 'use client';
 
-import { Flex } from '@chakra-ui/react';
+import { Flex, Show } from '@chakra-ui/react';
 import { useContext } from 'react';
 import { IShow } from '../../../../../typings/Show.type';
 import { ShowCard } from '../../../../shared/ShowCard/ShowCard';
+import { ShowMobileCard } from '../../../../shared/ShowMobileCard/ShowMobileCard';
 import { ShowPickerContext } from './ShowPickerContextProvider';
 
 export const ShowPickerStep = () => {
@@ -27,15 +28,28 @@ export const ShowPickerStep = () => {
 	};
 
 	return (
-		<Flex flexDirection={{ base: 'column', md: 'row' }} align="center" justify="space-between" gap="8">
+		<Flex flexDirection={{ base: 'column', lg: 'row' }} align="center" justify="space-between" gap="4">
 			{activeStepShows.map((availableShow) => (
-				<ShowCard
-					border={selectedShows.some((selectedShow) => selectedShow.id === availableShow.id) ? '3px solid' : 'none'}
-					borderColor="greenBase"
-					onClick={() => toggleShowSelection(availableShow)}
-					key={availableShow.id}
-					show={availableShow}
-				/>
+				<>
+					<Show above="lg">
+						<ShowCard
+							border={selectedShows.some((selectedShow) => selectedShow.id === availableShow.id) ? '3px solid' : 'none'}
+							borderColor="greenBase"
+							onClick={() => toggleShowSelection(availableShow)}
+							key={availableShow.id}
+							show={availableShow}
+						/>
+					</Show>
+					<Show below="lg">
+						<ShowMobileCard
+							border={selectedShows.some((selectedShow) => selectedShow.id === availableShow.id) ? '3px solid' : 'none'}
+							borderColor="greenBase"
+							onClick={() => toggleShowSelection(availableShow)}
+							key={availableShow.id}
+							show={availableShow}
+						/>
+					</Show>
+				</>
 			))}
 		</Flex>
 	);

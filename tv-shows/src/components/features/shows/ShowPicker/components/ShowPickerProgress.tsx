@@ -12,8 +12,6 @@ export const ShowPickerProgress = () => {
 	}
 
 	return (
-		!isResultsStep && (
-			<Progress value={Math.min((activeStep / (Math.ceil(availableShows.length / 4) - 1)) * 100, 100)} />
-		)
+		!isResultsStep && <Progress value={Math.min((activeStep / Math.ceil(availableShows.length / 4)) * 100, 100)} />
 	);
 };
