@@ -12,7 +12,7 @@ export interface IRatingFormInputs {
 }
 
 interface IReviewFormProps {
-	saveForm: (data: IRatingFormInputs) => void;
+	saveForm: (data: IRatingFormInputs) => Promise<void>;
 	review?: IReview;
 }
 
@@ -33,7 +33,7 @@ export const ReviewForm = ({ review, saveForm }: IReviewFormProps) => {
 		setValue('rating', selectedRating);
 	}, [selectedRating, setValue]);
 
-	const onReviewSubmit = (formData: IRatingFormInputs) => {
+	const onReviewSubmit = async (formData: IRatingFormInputs) => {
 		const { comment, rating } = formData;
 
 		if (!rating || !comment) {
@@ -46,7 +46,7 @@ export const ReviewForm = ({ review, saveForm }: IReviewFormProps) => {
 		resetField('comment');
 		resetField('rating');
 
-		saveForm(formData);
+		await saveForm(formData);
 
 		if (!review) {
 			setSelectedRating(0);

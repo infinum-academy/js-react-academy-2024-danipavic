@@ -13,10 +13,10 @@ export const CreateReviewContainer = () => {
 		},
 	});
 
-	const saveForm = (formData: IRatingFormInputs) => {
+	const saveForm = async (formData: IRatingFormInputs) => {
 		const { comment, rating } = formData;
 
-		trigger({
+		await trigger({
 			comment,
 			rating,
 			show_id: showID,
