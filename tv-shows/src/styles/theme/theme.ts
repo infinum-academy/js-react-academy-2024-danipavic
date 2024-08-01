@@ -12,7 +12,7 @@ export default extendTheme({
 	styles: {
 		global: {
 			body: {
-				bg: 'purpleDarkest',
+				bg: 'purpleDarker',
 			},
 		},
 	},

@@ -62,8 +62,9 @@ export const RegisterForm = () => {
 				status="success"
 				flexDirection="column"
 				gap="6"
+				mx="6"
 				borderRadius="containerRadius"
-				backgroundColor="purpleBase"
+				backgroundColor="purpleDark"
 			>
 				<Text color="white">Registration successful, proceed to the login.</Text>
 				<Button href="/auth/login" variant="primary" as={NextLink}>

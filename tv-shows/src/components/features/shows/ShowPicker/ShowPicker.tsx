@@ -27,7 +27,7 @@ export const ShowPicker = () => {
 			</Button>
 			<Modal isOpen={isOpen} scrollBehavior="inside" isCentered onClose={onClose}>
 				<ModalOverlay />
-				<ModalContent maxW="fit-content" bgColor="purpleDarkest">
+				<ModalContent maxW="fit-content" bgColor="purpleDarker">
 					<ModalHeader>
 						<Heading>Show Picker</Heading>
 					</ModalHeader>
