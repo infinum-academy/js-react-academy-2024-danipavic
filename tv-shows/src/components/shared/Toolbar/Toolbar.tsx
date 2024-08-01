@@ -23,7 +23,7 @@ export function Toolbar({ ...rest }: BoxProps) {
 			<Box {...rest}>
 				<Flex justify="space-between" align="center">
 					<Header />
-					<Button size="md" leftIcon={<HamburgerIcon />} variant="link" onClick={onOpen} />
+					<Button size="md" leftIcon={<HamburgerIcon />} variant="link" minW="fit-content" mb="0" onClick={onOpen} />
 				</Flex>
 				<Drawer isOpen={isOpen} placement="left" onClose={onClose}>
 					<DrawerOverlay />
