@@ -58,9 +58,16 @@ export const RegisterForm = () => {
 
 	if (registered) {
 		return (
-			<Alert status="success" flexDirection="column" gap="6" borderRadius="2xl" backgroundColor="purple.500">
+			<Alert
+				status="success"
+				flexDirection="column"
+				gap="6"
+				mx="6"
+				borderRadius="containerRadius"
+				backgroundColor="purpleDark"
+			>
 				<Text color="white">Registration successful, proceed to the login.</Text>
-				<Button href="/auth/login" color="purple.900" as={NextLink}>
+				<Button href="/auth/login" variant="primary" as={NextLink}>
 					Login
 				</Button>
 			</Alert>
@@ -78,44 +85,30 @@ export const RegisterForm = () => {
 					>
 						<FormControl isRequired={true} isDisabled={isSubmitting}>
 							<FormLabel>Email</FormLabel>
-							<IconInput<IRegisterFormInputs>
-								icon={MdAccountCircle}
-								type="email"
-								formControlName="email"
-								register={register}
-								placeholder="Email"
-							/>
+							<IconInput type="email" placeholder="Email" icon={MdAccountCircle} {...register('email')} />
 						</FormControl>
 						<FormControl isRequired={true} isDisabled={isSubmitting}>
 							<FormLabel>Password</FormLabel>
-							<IconInput<IRegisterFormInputs>
-								icon={MdLock}
-								type="password"
-								formControlName="password"
-								register={register}
-								placeholder="Password"
-							/>
+							<IconInput type="password" placeholder="Password" {...register('password')} icon={MdLock} />
 							<FormHelperText color="white">At least 8 characters</FormHelperText>
 						</FormControl>
 						<FormControl isRequired={true} isInvalid={!matchingPasswords} isDisabled={isSubmitting} mb="4">
 							<FormLabel>Confirm password</FormLabel>
-							<IconInput<IRegisterFormInputs>
-								icon={MdLock}
+							<IconInput
 								type="password"
-								formControlName="password_confirmation"
-								register={register}
 								placeholder="Confirm password"
+								icon={MdLock}
+								{...register('password_confirmation')}
 							/>
 							<FormErrorMessage color="white">Password must match</FormErrorMessage>
 						</FormControl>
 						<Button
 							type="submit"
+							variant="primary"
 							mb="2"
-							borderRadius="3xl"
 							isLoading={isSubmitting}
 							disabled={isSubmitting}
 							loadingText="Registering"
-							color="purple.700"
 							paddingY="6"
 							paddingX="8"
 						>

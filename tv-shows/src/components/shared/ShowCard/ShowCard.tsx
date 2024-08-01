@@ -5,18 +5,18 @@ import { IShow } from '../../../typings/Show.type';
 
 export const ShowCard = (show: IShow) => {
 	return (
-		<Card as={NextLink} href={`/all-shows/${show.id}`} w="240px" h="340px" borderRadius="2xl" overflow="hidden">
+		<Card as={NextLink} href={`/all-shows/${show.id}`} w="240px" h="340px">
 			<Image
-				src={show.image_url}
+				src={show.image_url ?? 'https://fakeimg.pl/1920x1080/fcfcfc/322659?text=Missing+show+cover'}
 				alt="Show image"
 				width="100%"
 				height="69%"
-				fallbackSrc="
-          https://fakeimg.pl/1920x1080/fcfcfc/322659?text=Missing+show+cover"
 			/>
-			<CardBody color="purple.700">
+			<CardBody color="purpleDark">
 				<VStack align="flex-start" height="100%">
-					<Heading size="md">{show.title}</Heading>
+					<Heading variant="secondary" size="md">
+						{show.title}
+					</Heading>
 					<Flex align="center">
 						<Icon as={MdOutlineStarPurple500} />
 						<Text fontSize="sm">{show.average_rating ?? 0} / 5</Text>

@@ -12,7 +12,7 @@ interface IShowReviewSectionProps {
 export const ShowReviewSection = ({ reviews }: IShowReviewSectionProps) => {
 	return (
 		<>
-			<Heading color="white" size="lg" mb={4}>
+			<Heading size="lg" mb={4}>
 				Reviews
 			</Heading>
 			<CreateReviewContainer />

@@ -9,8 +9,8 @@ export const AuthFormCard = ({ children }: { children: React.ReactNode }) => {
 			align="center"
 			justify="center"
 			color="white"
-			backgroundColor="purple.800"
-			borderRadius="2xl"
+			backgroundColor="purpleDark"
+			borderRadius="containerRadius"
 			padding="14"
 			width="fit-content"
 		>

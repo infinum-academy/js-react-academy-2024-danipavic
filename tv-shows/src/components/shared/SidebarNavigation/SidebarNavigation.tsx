@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, VStack } from '@chakra-ui/react';
+import { Button, Show, StackProps, VStack } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -10,7 +10,7 @@ import { getUser } from '../../../fetchers/auth';
 import { swrKeys } from '../../../fetchers/swrKeys';
 import { Header } from '../Header/Header';
 
-export const SidebarNavigation = () => {
+export const SidebarNavigation = ({ ...rest }: StackProps) => {
 	const pathname = usePathname();
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 	const { mutate, data } = useSWR(swrKeys.user, getUser, { refreshInterval: 5000 });
@@ -26,38 +26,38 @@ export const SidebarNavigation = () => {
 
 	return (
 		isLoggedIn && (
-			<VStack maxH="100vh" as="aside" p="6" align="flex-start">
+			<VStack maxH="100vh" flexGrow="1" as="aside" p="6" align="flex-start" {...rest}>
 				<VStack align="flex-start" mb="auto">
-					<Header />
+					<Show above="lg">
+						<Header />
+					</Show>
 					<Button
+						variant="link"
 						as={NextLink}
 						href={'/all-shows'}
 						textDecoration={pathname === '/all-shows' ? 'underline' : ''}
 						fontSize="2xl"
 						mb="4"
 						fontWeight="light"
-						color="white"
-						variant="link"
 					>
 						All shows
 					</Button>
 					<Button
+						variant="link"
 						as={NextLink}
 						href={'/top-rated'}
 						textDecoration={pathname === '/top-rated' ? 'underline' : ''}
 						fontSize="2xl"
 						mb="4"
 						fontWeight="light"
-						color="white"
-						variant="link"
 					>
 						Top rated
 					</Button>
-					<Button as={NextLink} href={'/'} fontSize="2xl" mb="4" fontWeight="light" color="white" variant="link">
+					<Button variant="link" as={NextLink} href={'/'} fontSize="2xl" mb="4" fontWeight="light">
 						My profile
 					</Button>
 				</VStack>
-				<Button variant="link" fontWeight="light" color="white" onClick={onLogout}>
+				<Button variant="link" fontWeight="light" onClick={onLogout}>
 					Logout
 				</Button>
 			</VStack>

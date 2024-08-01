@@ -9,7 +9,7 @@ interface IShowProps {
 
 export const ShowDetails = ({ show, reviews }: IShowProps) => {
 	return (
-		<Card borderRadius="2xl" h="340px" overflow="hidden" mb={4}>
+		<Card h="340px" mb={4}>
 			<Image
 				src={show.image_url ?? 'https://fakeimg.pl/1920x1080/fcfcfc/322659?text=Missing+show+cover'}
 				width="100%"
@@ -17,8 +17,10 @@ export const ShowDetails = ({ show, reviews }: IShowProps) => {
 				objectFit="cover"
 				alt="Show image"
 			/>
-			<CardBody color="purple.700">
-				<Heading size="md">{show.title}</Heading>
+			<CardBody color="purpleDark">
+				<Heading variant="secondary" size="md">
+					{show.title}
+				</Heading>
 				<Text pt="2" fontSize="sm">
 					{show.description}
 				</Text>
